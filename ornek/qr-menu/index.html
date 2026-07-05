@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3a2a1e">
+<meta name="description" content="Defne Kahve — Antakya. QR menü örnek çalışması. Kahveler, soğuk içecekler, tatlılar ve atıştırmalıklar.">
+<title>Defne Kahve · Menü</title>
+<style>
+  :root{
+    --krem:#f6efe4;
+    --krem-2:#efe5d5;
+    --kagit:#fbf7ef;
+    --kahve:#3a2a1e;
+    --kahve-2:#5b4636;
+    --kahve-3:#8a7159;
+    --sut:#cbb79a;
+    --yesil:#4f6f52;
+    --yesil-koyu:#3c5940;
+    --yesil-acik:#e8efe6;
+    --altin:#b98a3e;
+    --whatsapp:#25d366;
+    --whatsapp-koyu:#1da851;
+    --golge:0 10px 30px rgba(58,42,30,.10);
+    --golge-yum:0 4px 14px rgba(58,42,30,.08);
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--font);
+    color:var(--kahve);
+    background:var(--krem);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding-bottom:96px;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:520px;margin:0 auto;background:var(--kagit);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(58,42,30,.06)}
+
+  /* --- Örnek rozeti --- */
+  .rozet{
+    position:fixed;top:10px;right:10px;z-index:60;
+    background:rgba(58,42,30,.86);color:#f6efe4;
+    font-size:10px;font-weight:700;letter-spacing:.04em;
+    padding:6px 10px;border-radius:999px;
+    display:flex;align-items:center;gap:5px;
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    box-shadow:0 4px 14px rgba(0,0,0,.18);
+    pointer-events:none;text-transform:uppercase;
+  }
+  .rozet .dot{width:6px;height:6px;border-radius:50%;background:var(--altin);flex:0 0 auto}
+
+  /* --- Kapak / Header --- */
+  .kapak{
+    position:relative;
+    background:
+      radial-gradient(120% 80% at 80% -10%, rgba(185,138,62,.30), transparent 60%),
+      radial-gradient(90% 70% at 0% 110%, rgba(79,111,82,.28), transparent 55%),
+      linear-gradient(160deg,#4a3524 0%, #3a2a1e 55%, #2e2117 100%);
+    color:#f6efe4;
+    padding:34px 22px 26px;
+    overflow:hidden;
+  }
+  .kapak::after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(246,239,228,.05) 1px, transparent 1.4px);
+    background-size:18px 18px;opacity:.5;pointer-events:none;
+  }
+  .kapak-ic{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .logo{
+    width:74px;height:74px;border-radius:22px;
+    background:linear-gradient(150deg,#f6efe4,#e6d7bd);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.4);
+    margin-bottom:14px;
+  }
+  .logo svg{width:44px;height:44px}
+  .marka{font-size:27px;font-weight:800;letter-spacing:.01em;line-height:1.1}
+  .marka span{color:#e9c689}
+  .alt-marka{margin-top:6px;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:#d9c6a6;font-weight:600}
+  .kapak-meta{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(246,239,228,.10);border:1px solid rgba(246,239,228,.18);
+    color:#efe2cb;font-size:11.5px;font-weight:600;
+    padding:6px 11px;border-radius:999px;
+  }
+  .chip svg{width:13px;height:13px;flex:0 0 auto;opacity:.9}
+
+  /* --- Kategori sekmeleri (sticky) --- */
+  .sekmeler{
+    position:sticky;top:0;z-index:40;
+    background:rgba(251,247,239,.92);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--krem-2);
+    box-shadow:0 6px 16px rgba(58,42,30,.05);
+  }
+  .sekme-scroll{
+    display:flex;gap:8px;overflow-x:auto;padding:11px 14px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  }
+  .sekme-scroll::-webkit-scrollbar{display:none}
+  .sekme{
+    flex:0 0 auto;border:1px solid var(--krem-2);
+    background:#fff;color:var(--kahve-2);
+    font-family:inherit;font-size:13.5px;font-weight:700;
+    padding:9px 15px;border-radius:999px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;
+    transition:background .18s ease,color .18s ease,border-color .18s ease,transform .12s ease;
+    white-space:nowrap;
+  }
+  .sekme svg{width:16px;height:16px;flex:0 0 auto}
+  .sekme.aktif{background:var(--kahve);color:#f6efe4;border-color:var(--kahve);box-shadow:var(--golge-yum)}
+  .sekme:active{transform:scale(.96)}
+
+  /* --- Bölümler --- */
+  .bolum{padding:26px 18px 8px;scroll-margin-top:64px}
+  .bolum-bas{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .bolum-ikon{
+    width:42px;height:42px;border-radius:13px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--yesil-acik);color:var(--yesil-koyu);
+    box-shadow:inset 0 0 0 1px rgba(79,111,82,.14);
+  }
+  .bolum-ikon svg{width:22px;height:22px}
+  .bolum-bas h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .bolum-bas p{font-size:12px;color:var(--kahve-3);margin-top:1px}
+
+  /* --- Ürün kartları --- */
+  .urunler{display:flex;flex-direction:column;gap:12px}
+  .urun{
+    display:flex;gap:14px;align-items:flex-start;
+    background:#fff;border:1px solid var(--krem-2);
+    border-radius:16px;padding:13px 14px;
+    box-shadow:var(--golge-yum);
+    position:relative;
+  }
+  .urun.oneri{border-color:rgba(185,138,62,.45);background:linear-gradient(180deg,#fffdf8,#fff)}
+  .urun-gorsel{
+    width:58px;height:58px;border-radius:13px;flex:0 0 auto;
+    position:relative;overflow:hidden;
+    box-shadow:inset 0 0 0 1px rgba(58,42,30,.06);
+  }
+  .urun-gorsel .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9)}
+  .urun-gorsel .glyph svg{width:28px;height:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.15))}
+  /* görsel dolgu paletleri */
+  .g-espresso{background:linear-gradient(150deg,#6f4a2e,#3a2416)}
+  .g-milk{background:linear-gradient(150deg,#c9a877,#9c7a4e)}
+  .g-cold{background:linear-gradient(150deg,#7fa7c4,#456c8c)}
+  .g-mint{background:linear-gradient(150deg,#6fae86,#3f7a58)}
+  .g-berry{background:linear-gradient(150deg,#c56b86,#8f3d5c)}
+  .g-sweet{background:linear-gradient(150deg,#d59a5a,#9c5f2c)}
+  .g-choco{background:linear-gradient(150deg,#7a4a2e,#4a2a16)}
+  .g-savory{background:linear-gradient(150deg,#c99a52,#8a6326)}
+  .g-tea{background:linear-gradient(150deg,#c48a3e,#8a5a1e)}
+
+  .urun-bilgi{flex:1 1 auto;min-width:0}
+  .urun-ust{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .urun-ad{font-size:15.5px;font-weight:700;color:var(--kahve);line-height:1.25}
+  .urun-fiyat{font-size:15px;font-weight:800;color:var(--yesil-koyu);white-space:nowrap;flex:0 0 auto}
+  .urun-fiyat small{font-size:11px;font-weight:700;color:var(--kahve-3);margin-left:1px}
+  .urun-aciklama{font-size:12.8px;color:var(--kahve-3);margin-top:3px;line-height:1.45}
+  .oneri-rozet{
+    display:inline-flex;align-items:center;gap:4px;margin-top:7px;
+    background:linear-gradient(180deg,#f4dcae,#e9c689);
+    color:#6b4a17;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+    padding:3px 9px;border-radius:999px;text-transform:uppercase;
+    box-shadow:0 1px 2px rgba(185,138,62,.25);
+  }
+  .oneri-rozet svg{width:11px;height:11px}
+
+  /* --- Bilgi şeridi --- */
+  .serit{
+    margin:22px 18px 0;padding:16px;border-radius:16px;
+    background:var(--yesil-acik);border:1px solid rgba(79,111,82,.18);
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .serit svg{width:22px;height:22px;flex:0 0 auto;color:var(--yesil-koyu);margin-top:1px}
+  .serit-metin b{display:block;font-size:13.5px;color:var(--yesil-koyu);margin-bottom:2px}
+  .serit-metin span{font-size:12.5px;color:var(--kahve-2)}
+
+  /* --- Footer --- */
+  .footer{padding:26px 20px 30px;text-align:center;color:var(--kahve-3)}
+  .footer .saat{
+    display:inline-flex;flex-direction:column;gap:2px;margin-bottom:14px;
+    font-size:12.5px;color:var(--kahve-2);
+  }
+  .footer .adres{font-size:13px;color:var(--kahve-2);font-weight:600}
+  .footer .ince{font-size:11.5px;margin-top:8px}
+  .kredi{
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--krem-2);
+    font-size:11px;color:var(--kahve-3);
+  }
+  .kredi b{color:var(--kahve-2)}
+
+  /* --- Sabit WhatsApp butonu --- */
+  .siparis-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:55;
+    display:flex;justify-content:center;
+    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(251,247,239,0),rgba(251,247,239,.95) 38%);
+    pointer-events:none;
+  }
+  .siparis-btn{
+    pointer-events:auto;
+    width:100%;max-width:492px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(180deg,var(--whatsapp),var(--whatsapp-koyu));
+    color:#fff;font-family:inherit;font-size:16px;font-weight:800;letter-spacing:.01em;
+    text-decoration:none;border:none;
+    padding:15px 18px;border-radius:16px;
+    box-shadow:0 8px 24px rgba(29,168,81,.36), inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .12s ease, box-shadow .18s ease;
+  }
+  .siparis-btn:active{transform:translateY(1px) scale(.99);box-shadow:0 4px 14px rgba(29,168,81,.34)}
+  .siparis-btn svg{width:22px;height:22px;flex:0 0 auto}
+
+  @media (min-width:521px){
+    body{padding-top:14px;padding-bottom:104px;background:var(--krem-2)}
+    .wrap{border-radius:26px;overflow:hidden;margin-top:10px;margin-bottom:10px;min-height:auto}
+    .kapak{border-radius:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important;transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="rozet"><span class="dot"></span>Örnek QR Menü · Hatay Digital</div>
+
+<div class="wrap">
+
+  <!-- KAPAK -->
+  <header class="kapak">
+    <div class="kapak-ic">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5b4636" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/>
+          <path d="M17 9h1.6a2.4 2.4 0 0 1 0 4.8H17"/>
+          <path d="M8 3.5c-.6.7-.6 1.3 0 2M11.5 3c-.6.7-.6 1.3 0 2"/>
+          <path d="M5 21h11"/>
+        </svg>
+      </div>
+      <div class="marka">Defne <span>Kahve</span></div>
+      <div class="alt-marka">Antakya</div>
+      <div class="kapak-meta">
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15 8l6 .8-4.5 4.2 1.2 6L12 16.8 6.3 19l1.2-6L3 8.8 9 8z"/></svg>
+          Taze çekirdek
+        </span>
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V8l6-4 6 4v13"/><path d="M10 21v-5h4v5"/></svg>
+          Şehir merkezi
+        </span>
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          08:00 – 24:00
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEKMELER -->
+  <nav class="sekmeler" aria-label="Menü kategorileri">
+    <div class="sekme-scroll" id="sekmeScroll">
+      <button class="sekme aktif" data-hedef="kahveler">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.6a2.4 2.4 0 0 1 0 4.8H17"/><path d="M5 21h11"/></svg>
+        Kahveler
+      </button>
+      <button class="sekme" data-hedef="soguk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.4 15.2A2 2 0 0 1 13.6 21h-3.2a2 2 0 0 1-2-1.8L7 4Z"/><path d="M6.6 9h10.8"/><path d="M12 4v-2"/></svg>
+        Soğuk İçecekler
+      </button>
+      <button class="sekme" data-hedef="tatlilar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-6a7 7 0 0 1 14 0v6"/><path d="M12 7V4"/><path d="M9.5 4.5c.9-1 4-1 5 0"/></svg>
+        Tatlılar
+      </button>
+      <button class="sekme" data-hedef="atistirmaliklar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 4 0 0 1 16 0"/><path d="M4 13a8 4 0 0 0 16 0v3a8 4 0 0 1-16 0Z"/><path d="M8 10.5l1-1M12 10l1-1M16 10.5l1-1"/></svg>
+        Atıştırmalıklar
+      </button>
+    </div>
+  </nav>
+
+  <!-- KAHVELER -->
+  <section class="bolum" id="kahveler">
+    <div class="bolum-bas">
+      <div class="bolum-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.6a2.4 2.4 0 0 1 0 4.8H17"/><path d="M8 3.5c-.6.7-.6 1.3 0 2M11.5 3c-.6.7-.6 1.3 0 2"/><path d="M5 21h11"/></svg></div>
+      <div><h2>Kahveler</h2><p>Taze çekilmiş, günlük kavrulmuş çekirdekler</p></div>
+    </div>
+    <div class="urunler">
+
+      <article class="urun oneri">
+        <div class="urun-gorsel g-espresso"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v4a5 5 0 0 1-5 5H9a4 4 0 0 1-4-4V8Z"/><path d="M15 9h1.5a2 2 0 0 1 0 4H15"/><path d="M8 4c-.5.6-.5 1 0 1.6"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Espresso</span><span class="urun-fiyat">65<small>₺</small></span></div>
+          <p class="urun-aciklama">Yoğun, kadifemsi tek shot. Günün başlangıcı için ideal.</p>
+          <span class="oneri-rozet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 5.9 19.4 7.4 13l-5-4.4L9 8z"/></svg>Şefin Önerisi</span>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-milk"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v4a5 5 0 0 1-5 5H9a4 4 0 0 1-4-4V8Z"/><path d="M15 9h1.5a2 2 0 0 1 0 4H15"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Cappuccino</span><span class="urun-fiyat">85<small>₺</small></span></div>
+          <p class="urun-aciklama">Espresso, buharda ısıtılmış süt ve bol köpük dengesi.</p>
+        </div>
+      </article>
+
+      <article class="urun oneri">
+        <div class="urun-gorsel g-milk"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v4a5 5 0 0 1-5 5H9a4 4 0 0 1-4-4V8Z"/><path d="M15 9h1.5a2 2 0 0 1 0 4H15"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Defne Latte</span><span class="urun-fiyat">95<small>₺</small></span></div>
+          <p class="urun-aciklama">İmza karışımımız; hafif defne aroması ve ipeksi süt köpüğü.</p>
+          <span class="oneri-rozet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 5.9 19.4 7.4 13l-5-4.4L9 8z"/></svg>Şefin Önerisi</span>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-espresso"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v4a5 5 0 0 1-5 5H9a4 4 0 0 1-4-4V8Z"/><path d="M15 9h1.5a2 2 0 0 1 0 4H15"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Americano</span><span class="urun-fiyat">70<small>₺</small></span></div>
+          <p class="urun-aciklama">Espresso üzerine sıcak su; sade ve dengeli içim.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-choco"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v4a5 5 0 0 1-5 5H9a4 4 0 0 1-4-4V8Z"/><path d="M15 9h1.5a2 2 0 0 1 0 4H15"/><path d="M9 4c-.5.6-.5 1 0 1.6"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Mocha</span><span class="urun-fiyat">98<small>₺</small></span></div>
+          <p class="urun-aciklama">Espresso, sıcak çikolata ve süt; tatlı isteyenlere.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-espresso"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h9a3 3 0 0 0 3-3V7H4Z"/><path d="M16 9h1.6a2 2 0 0 1 0 4H16"/><path d="M6 3.5c-.5.6-.5 1 0 1.6"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Türk Kahvesi</span><span class="urun-fiyat">60<small>₺</small></span></div>
+          <p class="urun-aciklama">Közde pişmiş, bol köpüklü. Yanında lokum ikramımızla.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-milk"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v4a5 5 0 0 1-5 5H9a4 4 0 0 1-4-4V8Z"/><path d="M15 9h1.5a2 2 0 0 1 0 4H15"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Flat White</span><span class="urun-fiyat">90<small>₺</small></span></div>
+          <p class="urun-aciklama">Çift shot espresso ve ince mikroköpük; yoğun kahve tadı.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SOĞUK İÇECEKLER -->
+  <section class="bolum" id="soguk">
+    <div class="bolum-bas">
+      <div class="bolum-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.4 15.2A2 2 0 0 1 13.6 21h-3.2a2 2 0 0 1-2-1.8L7 4Z"/><path d="M6.6 9h10.8"/><path d="M12 2v2"/></svg></div>
+      <div><h2>Soğuk İçecekler</h2><p>Buz gibi ferahlatan seçimler</p></div>
+    </div>
+    <div class="urunler">
+
+      <article class="urun oneri">
+        <div class="urun-gorsel g-cold"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.4 15.2A2 2 0 0 1 13.6 21h-3.2a2 2 0 0 1-2-1.8L7 4Z"/><path d="M6.6 9h10.8"/><path d="M12 12v6"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Iced Latte</span><span class="urun-fiyat">95<small>₺</small></span></div>
+          <p class="urun-aciklama">Soğuk süt ve espresso, bol buzla. Yaz için vazgeçilmez.</p>
+          <span class="oneri-rozet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 5.9 19.4 7.4 13l-5-4.4L9 8z"/></svg>Şefin Önerisi</span>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-choco"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.4 15.2A2 2 0 0 1 13.6 21h-3.2a2 2 0 0 1-2-1.8L7 4Z"/><path d="M6.6 9h10.8"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Cold Brew</span><span class="urun-fiyat">100<small>₺</small></span></div>
+          <p class="urun-aciklama">12 saat soğuk demleme; yumuşak, düşük asit, yoğun aroma.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-sweet"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.4 15.2A2 2 0 0 1 13.6 21h-3.2a2 2 0 0 1-2-1.8L7 4Z"/><path d="M6.6 9h10.8"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Karamel Frappe</span><span class="urun-fiyat">110<small>₺</small></span></div>
+          <p class="urun-aciklama">Blendlenmiş buz, kahve ve karamel; üzeri krema soslu.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-berry"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11a2 2 0 0 1-2 1.8H9A2 2 0 0 1 7 19L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Limonata</span><span class="urun-fiyat">75<small>₺</small></span></div>
+          <p class="urun-aciklama">Taze sıkılmış limon, nane yaprağı ve bir tutam bal.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-mint"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11a2 2 0 0 1-2 1.8H9A2 2 0 0 1 7 19L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Yeşil Elma Soda</span><span class="urun-fiyat">70<small>₺</small></span></div>
+          <p class="urun-aciklama">Ev yapımı yeşil elma şurubu, soda ve buz. Ferah ve hafif.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-cold"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11a2 2 0 0 1-2 1.8H9A2 2 0 0 1 7 19L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Buzlu Çay (Şeftali)</span><span class="urun-fiyat">65<small>₺</small></span></div>
+          <p class="urun-aciklama">Ev demlemesi soğuk çay, şeftali aroması ve limon dilimi.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- TATLILAR -->
+  <section class="bolum" id="tatlilar">
+    <div class="bolum-bas">
+      <div class="bolum-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-6a7 7 0 0 1 14 0v6"/><path d="M12 7V4"/></svg></div>
+      <div><h2>Tatlılar</h2><p>Kahvenin yanında mükemmel eşlik</p></div>
+    </div>
+    <div class="urunler">
+
+      <article class="urun oneri">
+        <div class="urun-gorsel g-choco"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-5a7 7 0 0 1 14 0v5"/><path d="M12 8V5"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">San Sebastian Cheesecake</span><span class="urun-fiyat">130<small>₺</small></span></div>
+          <p class="urun-aciklama">Üstü karamelize, içi akışkan. Bizim en çok sevilenimiz.</p>
+          <span class="oneri-rozet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 5.9 19.4 7.4 13l-5-4.4L9 8z"/></svg>Şefin Önerisi</span>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-sweet"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-5a7 7 0 0 1 14 0v5"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Antakya Künefesi</span><span class="urun-fiyat">120<small>₺</small></span></div>
+          <p class="urun-aciklama">Tel kadayıf, künefelik peynir, şerbet; sıcak servis edilir.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-choco"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-5a7 7 0 0 1 14 0v5"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Sıcak Brownie</span><span class="urun-fiyat">115<small>₺</small></span></div>
+          <p class="urun-aciklama">Yoğun çikolatalı, ılık servis; yanında vanilyalı dondurma.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-sweet"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-5a7 7 0 0 1 14 0v5"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Tiramisu</span><span class="urun-fiyat">110<small>₺</small></span></div>
+          <p class="urun-aciklama">Kahveye batırılmış kedidili, mascarpone ve kakao.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-milk"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M5 20v-5a7 7 0 0 1 14 0v5"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Profiterol</span><span class="urun-fiyat">95<small>₺</small></span></div>
+          <p class="urun-aciklama">Krema dolgulu mini choux hamurları, çikolata sosuyla.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ATIŞTIRMALIKLAR -->
+  <section class="bolum" id="atistirmaliklar">
+    <div class="bolum-bas">
+      <div class="bolum-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 4 0 0 1 16 0"/><path d="M4 13a8 4 0 0 0 16 0v3a8 4 0 0 1-16 0Z"/></svg></div>
+      <div><h2>Atıştırmalıklar</h2><p>Hafif açlıklar ve keyifli molalar için</p></div>
+    </div>
+    <div class="urunler">
+
+      <article class="urun oneri">
+        <div class="urun-gorsel g-savory"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Kaşarlı Tost</span><span class="urun-fiyat">90<small>₺</small></span></div>
+          <p class="urun-aciklama">Bol kaşarlı, çıtır ekmekte; yanında turşu ve cips.</p>
+          <span class="oneri-rozet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 5.9 19.4 7.4 13l-5-4.4L9 8z"/></svg>Şefin Önerisi</span>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-savory"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 2 6 5 6 9a6 6 0 0 1-12 0c0-4 2-7 6-9Z"/><path d="M9 13a3 3 0 0 0 6 0"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Peynir Tabağı</span><span class="urun-fiyat">140<small>₺</small></span></div>
+          <p class="urun-aciklama">Yöresel peynirler, ceviz, bal ve taze ekmek. İkiliye ideal.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-savory"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M4 11h16"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Simit &amp; Kaşar</span><span class="urun-fiyat">55<small>₺</small></span></div>
+          <p class="urun-aciklama">Taze susamlı simit, dilimlenmiş kaşar ve domates ile.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-tea"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 1.5"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Kurabiye Tabağı</span><span class="urun-fiyat">70<small>₺</small></span></div>
+          <p class="urun-aciklama">Günün ev yapımı kurabileri; tarçınlı, fındıklı ve sade.</p>
+        </div>
+      </article>
+
+      <article class="urun">
+        <div class="urun-gorsel g-savory"><span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l7-14 7 14Z"/><path d="M8 13h8"/></svg></span></div>
+        <div class="urun-bilgi">
+          <div class="urun-ust"><span class="urun-ad">Patates Kızartması</span><span class="urun-fiyat">75<small>₺</small></span></div>
+          <p class="urun-aciklama">Çıtır kızarmış, deniz tuzlu; yanında iki sos ile.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BİLGİ ŞERİDİ -->
+  <div class="serit">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a7 7 0 0 1 14 0c0 5.65-7 10-7 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>
+    <div class="serit-metin">
+      <b>Masaya servis &amp; paket sipariş</b>
+      <span>Menüden beğendiklerinizi WhatsApp üzerinden bize iletin; masanıza getirelim veya paketleyelim.</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="saat">
+      <span><b>Her gün</b> 08:00 – 24:00</span>
+    </div>
+    <div class="adres">Kurtuluş Caddesi, Antakya / Hatay</div>
+    <div class="ince">Fiyatlarımıza KDV dahildir. Menü örnek amaçlı hazırlanmıştır.</div>
+    <div class="kredi">
+      Bu bir <b>örnek QR menü</b> çalışmasıdır — <b>Hatay Digital</b> tarafından hazırlanmıştır.<br>
+      İletişim: 0530 595 71 76
+    </div>
+  </footer>
+
+</div>
+
+<!-- SABİT WHATSAPP BUTONU -->
+<div class="siparis-bar">
+  <a class="siparis-btn" href="https://wa.me/905305957176?text=Merhaba%2C%20Defne%20Kahve%20men%C3%BCs%C3%BCnden%20sipari%C5%9F%20vermek%20istiyorum." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42l-.48-.01c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+    WhatsApp'tan Sipariş Ver
+  </a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var sekmeler = Array.prototype.slice.call(document.querySelectorAll(".sekme"));
+  var bolumler = sekmeler.map(function(s){ return document.getElementById(s.getAttribute("data-hedef")); });
+  var scroller = document.getElementById("sekmeScroll");
+  var tiklamaKilidi = false;
+  var kilitTimer = null;
+
+  function aktifYap(el){
+    sekmeler.forEach(function(s){ s.classList.remove("aktif"); });
+    if(el){
+      el.classList.add("aktif");
+      // aktif sekmeyi görünür alana kaydır
+      var solHedef = el.offsetLeft - (scroller.clientWidth/2) + (el.clientWidth/2);
+      scroller.scrollTo({ left: solHedef, behavior: "smooth" });
+    }
+  }
+
+  sekmeler.forEach(function(s){
+    s.addEventListener("click", function(){
+      var hedef = document.getElementById(s.getAttribute("data-hedef"));
+      if(!hedef) return;
+      aktifYap(s);
+      // scroll-spy'ı kısa süre sustur ki hedefe kayarken sekme atlamasın
+      tiklamaKilidi = true;
+      if(kilitTimer) clearTimeout(kilitTimer);
+      kilitTimer = setTimeout(function(){ tiklamaKilidi = false; }, 700);
+      var y = hedef.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    });
+  });
+
+  // Scroll-spy: hangi bölüm görünürse o sekme aktif
+  function spy(){
+    if(tiklamaKilidi) return;
+    var referans = 90; // sticky bar altı
+    var seciliIndex = 0;
+    for(var i=0; i<bolumler.length; i++){
+      var b = bolumler[i];
+      if(!b) continue;
+      if(b.getBoundingClientRect().top - referans <= 0){
+        seciliIndex = i;
+      }
+    }
+    if(!sekmeler[seciliIndex].classList.contains("aktif")){
+      aktifYap(sekmeler[seciliIndex]);
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener("scroll", function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){ spy(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive:true });
+
+  spy();
+})();
+</script>
+
+</body>
+</html>
