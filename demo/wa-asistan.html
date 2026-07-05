@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#075E54">
+<title>Mehmet Usta Erkek Kuaförü — 7/24 Yapay Zekâ Asistanı · Hatay Dijital Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:#1B2A4A;
+    display:flex;justify-content:center;
+    height:100vh;height:100dvh;overflow:hidden;
+  }
+  .phone{
+    width:100%;max-width:480px;height:100%;
+    display:flex;flex-direction:column;
+    background:#EFE7DE;
+    box-shadow:0 0 40px rgba(0,0,0,.45);
+  }
+
+  /* ---------- Üst bant ---------- */
+  .top{
+    background:#075E54;color:#fff;
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;
+    padding-top:calc(10px + env(safe-area-inset-top));
+    flex:0 0 auto;
+  }
+  .top .back{display:flex;align-items:center;opacity:.9}
+  .top .back svg{width:22px;height:22px;fill:#fff}
+  .avatar{
+    width:40px;height:40px;border-radius:50%;
+    background:#F4F2ED;display:flex;align-items:center;justify-content:center;
+    font-size:22px;flex:0 0 auto;
+  }
+  .who{flex:1;min-width:0}
+  .who .name{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .who .status{font-size:12px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top .icons{display:flex;gap:18px;align-items:center;opacity:.9}
+  .top .icons svg{width:20px;height:20px;fill:#fff}
+
+  /* ---------- Sohbet zemini ---------- */
+  .chat{
+    flex:1 1 auto;overflow-y:auto;
+    padding:14px 10px 8px;
+    background-color:#EFE7DE;
+    background-image:
+      radial-gradient(rgba(27,42,74,.045) 1.4px, transparent 1.5px),
+      radial-gradient(rgba(27,42,74,.035) 1.2px, transparent 1.3px);
+    background-size:26px 26px, 26px 26px;
+    background-position:0 0, 13px 13px;
+    scroll-behavior:smooth;
+  }
+  .daypill,.notice{
+    margin:0 auto 12px;width:fit-content;max-width:88%;
+    font-size:12px;text-align:center;
+    padding:5px 12px;border-radius:8px;
+    box-shadow:0 1px 1px rgba(0,0,0,.08);
+  }
+  .daypill{background:#E1F2FA;color:#4A5A66;font-weight:500}
+  .notice{background:#FCF4C6;color:#5C5340}
+
+  .row{display:flex;margin:2px 0 8px}
+  .row.out{justify-content:flex-end}
+  .bubble{
+    position:relative;max-width:78%;
+    padding:7px 10px 8px;
+    border-radius:9px;
+    font-size:14.5px;line-height:1.42;color:#111B21;
+    box-shadow:0 1px 1px rgba(0,0,0,.10);
+    word-wrap:break-word;
+  }
+  .row.in  .bubble{background:#FFFFFF;border-top-left-radius:2px}
+  .row.out .bubble{background:#DCF8C6;border-top-right-radius:2px}
+  .row.in  .bubble::before,
+  .row.out .bubble::before{
+    content:"";position:absolute;top:0;width:0;height:0;
+    border-style:solid;
+  }
+  .row.in  .bubble::before{left:-7px;border-width:0 8px 9px 0;border-color:transparent #FFFFFF transparent transparent}
+  .row.out .bubble::before{right:-7px;border-width:0 0 9px 8px;border-color:transparent transparent transparent #DCF8C6}
+
+  .meta{
+    float:right;margin:6px -2px -4px 8px;
+    font-size:11px;color:#8696A0;
+    display:inline-flex;align-items:center;gap:3px;
+    user-select:none;
+  }
+  .ticks{font-size:12px;letter-spacing:-3px;color:#8696A0}
+  .ticks.read{color:#53BDEB}
+
+  /* yazıyor... */
+  .typing .bubble{padding:12px 14px}
+  .dots{display:inline-flex;gap:4px}
+  .dots i{
+    width:7px;height:7px;border-radius:50%;background:#9AA6AD;
+    animation:blink 1.2s infinite ease-in-out;
+  }
+  .dots i:nth-child(2){animation-delay:.18s}
+  .dots i:nth-child(3){animation-delay:.36s}
+  @keyframes blink{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+  /* Konum kartı */
+  .map{
+    width:230px;max-width:100%;height:104px;border-radius:7px;margin-bottom:6px;
+    position:relative;overflow:hidden;
+    background:
+      linear-gradient(115deg, transparent 47%, #FDFDFB 47%, #FDFDFB 53%, transparent 53%),
+      linear-gradient(0deg,   transparent 63%, #FFFFFF 63%, #FFFFFF 70%, transparent 70%),
+      linear-gradient(90deg,  transparent 30%, #FFFFFF 30%, #FFFFFF 36%, transparent 36%),
+      linear-gradient(160deg, #CFE3C4 0%, #DCE9CF 55%, #C6DDBB 100%);
+  }
+  .map .pin{
+    position:absolute;left:50%;top:42%;transform:translate(-50%,-60%);
+    font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));
+  }
+  .maplink{
+    display:inline-block;margin-top:4px;
+    color:#027EB5;text-decoration:none;font-weight:500;cursor:pointer;
+  }
+  .maplink:active{opacity:.6}
+
+  /* Randevu kartı */
+  .appt{border-left:4px solid #00A884;border-radius:6px;background:#F7FBF9;padding:8px 10px;margin:2px 0 4px}
+  .appt .t1{font-weight:700;color:#0B6E5D;font-size:14px;margin-bottom:4px}
+  .appt .t2{font-size:14px;margin-bottom:2px}
+  .appt .t3{font-size:12.5px;color:#5B6B73;margin-top:5px}
+
+  /* ---------- Çipler ---------- */
+  .chips{
+    flex:0 0 auto;display:flex;gap:8px;
+    overflow-x:auto;padding:8px 10px 4px;
+    background:transparent;
+    scrollbar-width:none;
+  }
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;border:1px solid #0B846F;color:#075E54;background:#FFFFFF;
+    font-size:13px;font-weight:600;font-family:inherit;
+    padding:7px 13px;border-radius:18px;cursor:pointer;
+    box-shadow:0 1px 1px rgba(0,0,0,.07);
+    transition:background .15s, transform .05s;
+  }
+  .chip:active{background:#DCF8C6;transform:scale(.97)}
+
+  /* ---------- Yazma alanı ---------- */
+  .inputbar{
+    flex:0 0 auto;display:flex;align-items:center;gap:8px;
+    padding:7px 8px 9px;
+  }
+  .field{
+    flex:1;display:flex;align-items:center;
+    background:#FFFFFF;border-radius:22px;
+    padding:6px 14px;box-shadow:0 1px 2px rgba(0,0,0,.08);
+  }
+  .field input{
+    flex:1;border:0;outline:0;background:transparent;
+    font-size:16px;font-family:inherit;color:#111B21;padding:4px 0;
+  }
+  .field input::placeholder{color:#9AA6AD}
+  .send{
+    width:44px;height:44px;border:0;border-radius:50%;
+    background:#00A884;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;flex:0 0 auto;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);
+    transition:transform .05s;
+  }
+  .send:active{transform:scale(.94)}
+  .send svg{width:21px;height:21px;fill:#fff;margin-left:2px}
+
+  /* ---------- Demo bandı ---------- */
+  .demoband{
+    flex:0 0 auto;background:#1B2A4A;color:#F4F2ED;
+    font-size:11px;letter-spacing:.02em;text-align:center;
+    padding:7px 10px;
+    padding-bottom:calc(7px + env(safe-area-inset-bottom));
+  }
+  .demoband a{color:#F26B3A;text-decoration:none;font-weight:600}
+
+  /* Toast */
+  .toast{
+    position:fixed;left:50%;bottom:120px;transform:translateX(-50%);
+    background:rgba(16,16,16,.88);color:#F4F2ED;
+    font-size:13px;padding:8px 16px;border-radius:18px;
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:50;
+    max-width:85%;text-align:center;
+  }
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="top">
+    <span class="back" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+    </span>
+    <div class="avatar">💈</div>
+    <div class="who">
+      <div class="name">Mehmet Usta Erkek Kuaförü</div>
+      <div class="status" id="status">7/24 Yapay Zekâ Asistanı · çevrimiçi</div>
+    </div>
+    <div class="icons" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+    </div>
+  </div>
+
+  <div class="chat" id="chat">
+    <div class="daypill">BUGÜN</div>
+    <div class="notice">🔒 Bu sohbet bir tanıtım demosudur — mesajlar örnek amaçlıdır.</div>
+  </div>
+
+  <div class="chips" id="chips">
+    <button class="chip" data-q="Kaça tıraş?">Kaça tıraş?</button>
+    <button class="chip" data-q="Açık mısınız?">Açık mısınız?</button>
+    <button class="chip" data-q="Adres neresi?">Adres neresi?</button>
+    <button class="chip" data-q="Yarın 14:00 randevu?">Yarın 14:00 randevu?</button>
+    <button class="chip" data-q="Hangi hizmetler var?">Hangi hizmetler var?</button>
+  </div>
+
+  <div class="inputbar">
+    <div class="field">
+      <input id="msg" type="text" placeholder="Mesaj yazın" autocomplete="off" maxlength="200" aria-label="Mesaj yazın">
+    </div>
+    <button class="send" id="send" aria-label="Gönder">
+      <svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg>
+    </button>
+  </div>
+
+  <div class="demoband">
+    Bu bir demodur — HATAY DİJİTAL Yapay Zekâ Asistanı ·
+    <a href="https://wa.me/905305957176">wa.me/905305957176</a>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chat   = document.getElementById("chat");
+  var input  = document.getElementById("msg");
+  var sendBt = document.getElementById("send");
+  var chips  = document.getElementById("chips");
+  var status = document.getElementById("status");
+  var toast  = document.getElementById("toast");
+
+  var STATUS_ONLINE = "7/24 Yapay Zekâ Asistanı · çevrimiçi";
+  var STATUS_TYPING = "yazıyor...";
+
+  var AYLAR = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+  var GUNLER = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+
+  /* ---------- yardımcılar ---------- */
+
+  function saatStr(d){
+    var h = d.getHours(), m = d.getMinutes();
+    return (h < 10 ? "0" + h : "" + h) + ":" + (m < 10 ? "0" + m : "" + m);
+  }
+
+  function tarihStr(d){
+    return d.getDate() + " " + AYLAR[d.getMonth()] + " " + GUNLER[d.getDay()];
+  }
+
+  /* Türkçe karakterleri sadeleştirip küçük harfe indirir (eşleşme için) */
+  function norm(s){
+    return s.toLocaleLowerCase("tr")
+      .replace(/ç/g,"c").replace(/ğ/g,"g").replace(/ı/g,"i")
+      .replace(/ö/g,"o").replace(/ş/g,"s").replace(/ü/g,"u");
+  }
+
+  function iceriyor(t, liste){
+    for (var i = 0; i < liste.length; i++){
+      if (t.indexOf(liste[i]) !== -1) return true;
+    }
+    return false;
+  }
+
+  function scrollSona(){
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  var toastZamanlayici = null;
+  function toastGoster(metin){
+    toast.textContent = metin;
+    toast.classList.add("show");
+    if (toastZamanlayici) clearTimeout(toastZamanlayici);
+    toastZamanlayici = setTimeout(function(){ toast.classList.remove("show"); }, 2200);
+  }
+
+  /* ---------- balon çizimi ---------- */
+
+  var sonKullaniciTiki = null;
+
+  function balonEkle(yon, icerikNode){
+    var row = document.createElement("div");
+    row.className = "row " + yon;
+    var b = document.createElement("div");
+    b.className = "bubble";
+    b.appendChild(icerikNode);
+
+    var meta = document.createElement("span");
+    meta.className = "meta";
+    meta.appendChild(document.createTextNode(saatStr(new Date())));
+    if (yon === "out"){
+      var tik = document.createElement("span");
+      tik.className = "ticks";
+      tik.textContent = "✓";
+      meta.appendChild(tik);
+      setTimeout(function(){ tik.textContent = "✓✓"; }, 450);
+      sonKullaniciTiki = tik;
+    }
+    b.appendChild(meta);
+    row.appendChild(b);
+    chat.appendChild(row);
+    scrollSona();
+  }
+
+  function metinNode(metin){
+    var span = document.createElement("span");
+    var parcalar = metin.split("\n");
+    for (var i = 0; i < parcalar.length; i++){
+      if (i > 0) span.appendChild(document.createElement("br"));
+      span.appendChild(document.createTextNode(parcalar[i]));
+    }
+    return span;
+  }
+
+  function htmlNode(html){
+    var span = document.createElement("span");
+    span.innerHTML = html; /* yalnızca bu dosyadaki sabit şablonlar için kullanılır */
+    return span;
+  }
+
+  function kullaniciMesaji(metin){
+    balonEkle("out", metinNode(metin));
+  }
+
+  /* yazıyor... balonu */
+  var yaziyorRow = null;
+  function yaziyorGoster(){
+    if (yaziyorRow) return;
+    yaziyorRow = document.createElement("div");
+    yaziyorRow.className = "row in typing";
+    yaziyorRow.innerHTML = '<div class="bubble"><span class="dots"><i></i><i></i><i></i></span></div>';
+    chat.appendChild(yaziyorRow);
+    status.textContent = STATUS_TYPING;
+    scrollSona();
+  }
+  function yaziyorGizle(){
+    if (yaziyorRow && yaziyorRow.parentNode) yaziyorRow.parentNode.removeChild(yaziyorRow);
+    yaziyorRow = null;
+    status.textContent = STATUS_ONLINE;
+  }
+
+  /* ---------- cevap kuyruğu ---------- */
+
+  var kuyruk = [];
+  var mesgul = false;
+
+  function cevapla(parcalar){
+    kuyruk.push(parcalar);
+    kuyrukIsle();
+  }
+
+  function kuyrukIsle(){
+    if (mesgul) return;
+    var is = kuyruk.shift();
+    if (!is) return;
+    mesgul = true;
+    parcaIsle(is, 0);
+  }
+
+  function parcaIsle(parcalar, i){
+    if (i >= parcalar.length){
+      mesgul = false;
+      if (sonKullaniciTiki){ sonKullaniciTiki.classList.add("read"); }
+      kuyrukIsle();
+      return;
+    }
+    setTimeout(function(){
+      yaziyorGoster();
+      var bekleme = 1000 + Math.floor(Math.random() * 500); /* 1–1.5 sn */
+      setTimeout(function(){
+        yaziyorGizle();
+        var p = parcalar[i];
+        balonEkle("in", p.html ? htmlNode(p.html) : metinNode(p.txt));
+        parcaIsle(parcalar, i + 1);
+      }, bekleme);
+    }, 350);
+  }
+
+  /* ---------- cevap içerikleri ---------- */
+
+  function fiyatCevabi(){
+    return [{ txt:
+      "Güncel fiyat listemiz şöyle:\n\n" +
+      "• Saç kesimi — 400 TL\n" +
+      "• Sakal tıraşı — 200 TL\n" +
+      "• Saç + sakal — 550 TL\n" +
+      "• Çocuk kesimi — 250 TL\n" +
+      "• Cilt bakımı — 350 TL\n" +
+      "• Damat paketi — 1.500 TL\n\n" +
+      "Randevu isterseniz gün ve saat yazmanız yeterli 😊" }];
+  }
+
+  function saatCevabi(){
+    var simdi = new Date();
+    var gun = simdi.getDay();
+    var saat = simdi.getHours();
+    var temel = "Çalışma saatlerimiz:\nPazartesi–Cumartesi · 09:00–21:00\nPazar · kapalı\n\n";
+    var ek;
+    if (gun === 0){
+      ek = "Bugün pazar, dükkân kapalı 🙏 Yarın 09:00'dan itibaren bekleriz.";
+    } else if (saat >= 9 && saat < 21){
+      ek = "Şu an açığız ✅ Bu akşam 21:00'e kadar buradayız.";
+    } else if (saat < 9){
+      ek = "Şu an kapalıyız; bugün 09:00'da açılıyoruz.";
+    } else if (gun === 6){
+      ek = "Bugünlük kapattık. Pazar kapalıyız; pazartesi 09:00'da bekleriz.";
+    } else {
+      ek = "Bugünlük kapattık; yarın 09:00'da bekleriz.";
+    }
+    return [{ txt: temel + ek }];
+  }
+
+  function adresCevabi(){
+    return [{ html:
+      '<div class="map"><span class="pin">📍</span></div>' +
+      '<strong>Mehmet Usta Erkek Kuaförü</strong><br>' +
+      'Defne Çiçeği Sokak No: 7<br>Antakya / Hatay<br>' +
+      '<span style="color:#5B6B73;font-size:13px">Uzun Çarşı girişine 2 dakika yürüme mesafesinde.</span><br>' +
+      '<a class="maplink" id="maplink-' + Date.now() + '" href="#" onclick="return demoHarita();">📍 Yol tarifini aç — Google Haritalar</a>'
+    }];
+  }
+
+  function hizmetCevabi(){
+    return [{ txt:
+      "Hizmetlerimiz:\n\n" +
+      "• Saç kesimi (yıkama dahil)\n" +
+      "• Sakal tıraşı ve şekillendirme\n" +
+      "• Çocuk kesimi\n" +
+      "• Cilt bakımı (buhar + maske)\n" +
+      "• Ağda ve kaş düzenleme\n" +
+      "• Damat paketi (saç + sakal + bakım)\n\n" +
+      "Fiyatlar için \"fiyat\" yazmanız yeterli." }];
+  }
+
+  function randevuKarti(gunMetni, saatMetni, notu){
+    var parcalar = [{ txt: "Bir saniye, takvim defterine bakıyorum... 📒" }];
+    var html =
+      '<div class="appt">' +
+        '<div class="t1">✅ Randevunuz alındı</div>' +
+        '<div class="t2">🗓️ ' + gunMetni + ' · ' + saatMetni + '</div>' +
+        '<div class="t2">💈 Mehmet Usta — koltuğunuz ayrıldı</div>' +
+        '<div class="t3">Takvime not ettim. Değişiklik olursa yazmanız yeterli.</div>' +
+      '</div>';
+    if (notu){
+      parcalar.push({ txt: notu });
+    }
+    parcalar.push({ html: html });
+    return parcalar;
+  }
+
+  function yarinRandevu(saatMetni){
+    var d = new Date();
+    d.setDate(d.getDate() + 1);
+    var notu = null;
+    if (d.getDay() === 0){ /* yarın pazarsa pazartesiye kaydır */
+      d.setDate(d.getDate() + 1);
+      notu = "Yarın pazar günü kapalıyız 🙏 Sizi pazartesi gününe, aynı saate not ediyorum:";
+    }
+    return randevuKarti(tarihStr(d), saatMetni, notu);
+  }
+
+  function bugunRandevu(saatMetni, saatSayi){
+    var simdi = new Date();
+    if (simdi.getDay() === 0){
+      return [{ txt: "Bugün pazar, dükkân kapalı 🙏 Yarın 09:00–21:00 arası için randevu verebilirim." }];
+    }
+    if (saatSayi <= simdi.getHours()){
+      return [{ txt: "Bugün o saati geçtik 😅 Daha ileri bir saat yazarsanız hemen not ederim. (21:00'e kadar açığız.)" }];
+    }
+    return randevuKarti("Bugün, " + tarihStr(simdi), saatMetni, null);
+  }
+
+  function tesekkurCevabi(){
+    return [{ txt: "Rica ederiz 🙏 Yine bekleriz — Mehmet Usta Erkek Kuaförü. İyi günler dileriz." }];
+  }
+
+  function selamCevabi(){
+    return [{ txt: "Merhaba, hoş geldiniz! 👋 Fiyat, çalışma saatleri, adres ya da randevu — ne isterseniz sorun, 7/24 buradayım." }];
+  }
+
+  function onayCevabi(){
+    return [{ txt: "Harika 👍 Başka bir sorunuz olursa buradayım." }];
+  }
+
+  function bilinmeyenCevabi(){
+    return [{ txt: "Bunu Mehmet Usta'ya iletiyorum, en kısa sürede döneceğiz 🙏" }];
+  }
+
+  /* ---------- serbest metin çözümleyici ---------- */
+
+  function saatYakala(t){
+    /* 14:00 / 14.30 / 14te / 14'te / saat 14 */
+    var m = t.match(/(\d{1,2})\s*[:.]\s*(\d{2})/);
+    if (m) return { h: parseInt(m[1], 10), m: parseInt(m[2], 10) };
+    m = t.match(/(\d{1,2})\s*'?\s*[dt][ea]\b/);
+    if (m) return { h: parseInt(m[1], 10), m: 0 };
+    m = t.match(/saat\s*(\d{1,2})\b/);
+    if (m) return { h: parseInt(m[1], 10), m: 0 };
+    return null;
+  }
+
+  function saatBicimle(s){
+    return (s.h < 10 ? "0" + s.h : "" + s.h) + ":" + (s.m < 10 ? "0" + s.m : "" + s.m);
+  }
+
+  function coz(ham){
+    var t = norm(ham);
+
+    /* teşekkür */
+    if (iceriyor(t, ["tesekkur","sagol","saol","eyvallah","tsk"])) return tesekkurCevabi();
+
+    /* selam */
+    if (iceriyor(t, ["merhaba","selam","gunaydin","iyi aksamlar","hello","mrb","slm"])) return selamCevabi();
+
+    /* randevu */
+    var saat = saatYakala(t);
+    var randevuIstek = iceriyor(t, ["randevu","rezervasyon","musait","uygun mu","gelebilir","gelsem","yer var","bos var"]);
+    var yarinMi = t.indexOf("yarin") !== -1;
+    var bugunMu = t.indexOf("bugun") !== -1;
+    if (randevuIstek || (saat && (yarinMi || bugunMu))){
+      if (saat && (saat.h > 23 || saat.m > 59)) saat = null;
+      if (saat && (saat.h < 9 || saat.h >= 21)){
+        return [{ txt: "O saatte kapalıyız 🙏 09:00–21:00 arasında bir saat yazarsanız hemen not ederim." }];
+      }
+      if (saat && yarinMi) return yarinRandevu(saatBicimle(saat));
+      if (saat && bugunMu) return bugunRandevu(saatBicimle(saat), saat.h);
+      if (saat) return [{ txt: "Hangi gün için olsun? \"Bugün\" ya da \"yarın\" yazmanız yeterli 😊" }];
+      return [{ txt: "Tabii, memnuniyetle 😊 Hangi gün ve saat isterdiniz? Örneğin: \"Yarın 14:00\"" }];
+    }
+
+    /* çalışma saatleri */
+    if (iceriyor(t, ["acik","kapali","saat kac","kacta","ne zaman","calisma saat","aciyor","kapaniyor"])) return saatCevabi();
+
+    /* adres */
+    if (iceriyor(t, ["adres","nerede","neresi","konum","yol tarifi","nereye","harita"])) return adresCevabi();
+
+    /* fiyat */
+    if (iceriyor(t, ["fiyat","kaca","kac para","kac tl","ucret","ne kadar","tiras","para"])) return fiyatCevabi();
+
+    /* hizmetler */
+    if (iceriyor(t, ["hizmet","neler var","ne yapiyor","sakal","cilt","cocuk","agda","damat","sac"])) return hizmetCevabi();
+
+    /* kısa onay */
+    if (iceriyor(t, ["tamam","olur","evet","peki","okey"]) || t === "ok") return onayCevabi();
+
+    return bilinmeyenCevabi();
+  }
+
+  /* ---------- olaylar ---------- */
+
+  function gonder(metin, hazirCevap){
+    metin = metin.replace(/\s+/g, " ").trim();
+    if (!metin) return;
+    kullaniciMesaji(metin);
+    cevapla(hazirCevap || coz(metin));
+  }
+
+  chips.addEventListener("click", function(e){
+    var hedef = e.target;
+    if (!hedef.classList || !hedef.classList.contains("chip")) return;
+    var soru = hedef.getAttribute("data-q");
+    var cevap;
+    switch (soru){
+      case "Kaça tıraş?":          cevap = fiyatCevabi(); break;
+      case "Açık mısınız?":        cevap = saatCevabi(); break;
+      case "Adres neresi?":        cevap = adresCevabi(); break;
+      case "Yarın 14:00 randevu?": cevap = yarinRandevu("14:00"); break;
+      case "Hangi hizmetler var?": cevap = hizmetCevabi(); break;
+      default: cevap = null;
+    }
+    gonder(soru, cevap);
+  });
+
+  sendBt.addEventListener("click", function(){
+    gonder(input.value, null);
+    input.value = "";
+    input.focus();
+  });
+
+  input.addEventListener("keydown", function(e){
+    if (e.key === "Enter"){
+      e.preventDefault();
+      gonder(input.value, null);
+      input.value = "";
+    }
+  });
+
+  /* harita linki taklidi (global — onclick ile çağrılır) */
+  window.demoHarita = function(){
+    toastGoster("Demo bağlantısı — gerçek asistanda konum pini gönderilir 📍");
+    return false;
+  };
+
+  /* ---------- açılış mesajı ---------- */
+
+  cevapla([{ txt:
+    "Merhaba, hoş geldiniz! 👋\n" +
+    "Ben Mehmet Usta Erkek Kuaförü'nün yapay zekâ asistanıyım. " +
+    "Fiyat, çalışma saatleri, adres ya da randevu — ne isterseniz sorun, gece gündüz buradayım." }]);
+
+})();
+</script>
+</body>
+</html>
