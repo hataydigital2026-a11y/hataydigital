@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antakya Nakliyat — Evden Eve Nakliyat · Hatay</title>
+<meta name="description" content="Antakya Nakliyat — Hatay'da sigortalı evden eve nakliyat, ofis taşıma, asansörlü taşıma ve paketleme. Canlı fiyat hesaplayıcı ile anında tahmini fiyat alın.">
+<style>
+  :root{
+    /* Güçlü-güven palet: derin lacivert zemin + sıcak turuncu vurgu */
+    --lacivert-derin:#0e1b33;
+    --lacivert:#14264a;
+    --lacivert-acik:#1d3663;
+    --antrasit:#0a1526;
+    --turuncu:#ff7a1a;
+    --turuncu-koyu:#e8630a;
+    --turuncu-acik:#ff9a4d;
+    --krem:#f6f3ee;
+    --krem-koyu:#ebe5db;
+    --metin:#182238;
+    --metin-yumusak:#4a5568;
+    --beyaz:#ffffff;
+    --cizgi:#dfd8cd;
+    --yesil:#1f9d55;
+    --golge-s:0 2px 8px rgba(14,27,51,.08);
+    --golge-m:0 10px 30px rgba(14,27,51,.14);
+    --golge-l:0 24px 60px rgba(14,27,51,.22);
+    --radius:16px;
+    --radius-s:11px;
+    --maks:1120px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--metin);
+    background:var(--krem);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation:none!important;transition:none!important}
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .kapsul{max-width:var(--maks);margin-inline:auto;padding-inline:20px;width:100%}
+
+  /* ---------- ÖRNEK ÇALIŞMA rozeti ---------- */
+  .rozet{
+    position:fixed;top:14px;right:14px;z-index:120;
+    display:flex;align-items:center;gap:8px;
+    background:rgba(14,27,51,.86);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    color:#fff;padding:8px 13px;border-radius:999px;
+    font-size:11.5px;font-weight:700;letter-spacing:.03em;
+    box-shadow:var(--golge-m);
+    border:1px solid rgba(255,255,255,.14);
+  }
+  .rozet .nokta{
+    width:7px;height:7px;border-radius:50%;background:var(--turuncu);
+    box-shadow:0 0 0 3px rgba(255,122,26,.28);flex:none;
+  }
+  .rozet small{font-weight:500;opacity:.74;font-size:10px;letter-spacing:.02em}
+  @media (max-width:520px){
+    .rozet small{display:none}
+    .rozet{top:10px;right:10px;padding:6px 11px;font-size:10.5px}
+  }
+
+  /* ---------- Sabit WhatsApp / arama çubuğu (mobil alt bar) ---------- */
+  .alt-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:110;
+    display:none;gap:10px;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom,0));
+    background:rgba(246,243,238,.94);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-top:1px solid var(--cizgi);
+  }
+  .alt-bar a{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+    padding:13px 12px;border-radius:12px;font-weight:800;font-size:15px;
+  }
+  .alt-bar .wa{background:#25d366;color:#fff}
+  .alt-bar .ara{background:var(--lacivert);color:#fff}
+  @media (max-width:760px){
+    .alt-bar{display:flex}
+    body{padding-bottom:76px}
+  }
+
+  /* ---------- Üst menü ---------- */
+  header.ust{
+    position:sticky;top:0;z-index:100;
+    background:rgba(14,27,51,.92);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .ust-ic{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:11px;color:#fff}
+  .logo .mark{
+    width:40px;height:40px;border-radius:11px;flex:none;
+    background:linear-gradient(135deg,var(--turuncu),var(--turuncu-koyu));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(255,122,26,.4);
+  }
+  .logo .isim{font-weight:800;font-size:18px;letter-spacing:-.01em;line-height:1.1}
+  .logo .isim span{display:block;font-weight:500;font-size:11px;opacity:.66;letter-spacing:.06em;text-transform:uppercase}
+  .nav-link{display:none;gap:26px;align-items:center}
+  .nav-link a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:600;transition:color .2s}
+  .nav-link a:hover{color:#fff}
+  .ust-cta{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--turuncu);color:#fff;font-weight:800;font-size:14px;
+    padding:10px 16px;border-radius:10px;transition:transform .15s,background .2s;
+  }
+  .ust-cta:hover{background:var(--turuncu-koyu);transform:translateY(-1px)}
+  @media (min-width:860px){.nav-link{display:flex}}
+  @media (max-width:520px){.logo .isim{font-size:16px}.ust-cta span{display:none}.ust-cta{padding:10px 13px}}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(1200px 600px at 78% -10%, rgba(255,122,26,.22), transparent 60%),
+      radial-gradient(900px 500px at 8% 110%, rgba(29,54,99,.9), transparent 55%),
+      linear-gradient(160deg,var(--lacivert-derin),var(--antrasit));
+    color:#fff;
+    padding:56px 0 72px;
+  }
+  /* dekoratif "yol/rota" çizgileri */
+  .hero .rota{
+    position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:44px 100%;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+    mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+  }
+  .hero-ic{position:relative;display:grid;grid-template-columns:1fr;gap:34px;align-items:center}
+  @media (min-width:940px){.hero-ic{grid-template-columns:1.05fr .95fr;gap:48px}}
+  .hero-etiket{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);
+    padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:600;
+    color:var(--turuncu-acik);margin-bottom:20px;letter-spacing:.02em;
+  }
+  .hero-etiket b{color:#fff;font-weight:700}
+  .hero h1{
+    font-size:clamp(30px,6.4vw,52px);line-height:1.08;font-weight:800;
+    letter-spacing:-.02em;text-wrap:balance;margin-bottom:16px;
+  }
+  .hero h1 em{font-style:normal;color:var(--turuncu-acik);position:relative}
+  .hero p.alt{font-size:clamp(15px,2.3vw,18.5px);color:rgba(255,255,255,.82);max-width:52ch;margin-bottom:28px}
+  .hero-btnlar{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:30px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:15px 24px;border-radius:13px;font-weight:800;font-size:16px;
+    transition:transform .15s,box-shadow .2s,background .2s;cursor:pointer;border:none;
+  }
+  .btn-wa{background:#25d366;color:#fff;box-shadow:0 10px 26px rgba(37,211,102,.36)}
+  .btn-wa:hover{background:#20bd5a;transform:translateY(-2px);box-shadow:0 14px 32px rgba(37,211,102,.44)}
+  .btn-cizgi{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.24)}
+  .btn-cizgi:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+  .btn-turuncu{background:var(--turuncu);color:#fff;box-shadow:0 10px 26px rgba(255,122,26,.36)}
+  .btn-turuncu:hover{background:var(--turuncu-koyu);transform:translateY(-2px)}
+
+  .hero-guven{display:flex;flex-wrap:wrap;gap:22px}
+  .hero-guven .gg{display:flex;align-items:center;gap:9px;font-size:13.5px;color:rgba(255,255,255,.8)}
+  .hero-guven .gg svg{flex:none;color:var(--turuncu-acik)}
+  .hero-guven .gg b{color:#fff;font-weight:700}
+
+  /* Hero görsel bloğu (fotoğraf alanı — CSS ile) */
+  .hero-gorsel{
+    position:relative;border-radius:22px;overflow:hidden;min-height:340px;
+    background:
+      radial-gradient(420px 320px at 30% 20%, rgba(255,154,77,.4), transparent 60%),
+      linear-gradient(150deg,#1d3663,#0e1b33);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:var(--golge-l);
+    display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  .hero-gorsel .kamyon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.92}
+  .hero-gorsel .kutu-desen{
+    position:absolute;inset:0;opacity:.16;
+    background-image:
+      linear-gradient(45deg,rgba(255,255,255,.5) 1px,transparent 1px),
+      linear-gradient(-45deg,rgba(255,255,255,.5) 1px,transparent 1px);
+    background-size:26px 26px;
+  }
+  .hero-gorsel .kart-ic{
+    position:relative;margin:18px;padding:16px 18px;border-radius:14px;
+    background:rgba(255,255,255,.96);color:var(--metin);box-shadow:var(--golge-m);
+    display:flex;align-items:center;gap:14px;
+  }
+  .hero-gorsel .kart-ic .ikon{
+    width:44px;height:44px;border-radius:11px;flex:none;
+    background:linear-gradient(135deg,var(--turuncu),var(--turuncu-koyu));
+    display:flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .hero-gorsel .kart-ic .yz b{display:block;font-size:15px;font-weight:800}
+  .hero-gorsel .kart-ic .yz span{font-size:12.5px;color:var(--metin-yumusak)}
+
+  /* ---------- Bölüm başlıkları ---------- */
+  section{padding:70px 0}
+  .bl-bas{text-align:center;max-width:640px;margin:0 auto 44px}
+  .bl-etiket{
+    display:inline-block;color:var(--turuncu-koyu);font-weight:800;font-size:12.5px;
+    letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;
+  }
+  .bl-bas h2{font-size:clamp(25px,4.4vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.14;text-wrap:balance;color:var(--lacivert-derin)}
+  .bl-bas p{margin-top:13px;color:var(--metin-yumusak);font-size:16px}
+
+  /* ---------- HESAPLAYICI (yıldız) ---------- */
+  .hesap-blok{
+    background:linear-gradient(170deg,var(--lacivert-derin),var(--antrasit));
+    position:relative;overflow:hidden;
+  }
+  .hesap-blok .rota{
+    position:absolute;inset:0;opacity:.4;pointer-events:none;
+    background-image:linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:40px 100%;
+  }
+  .hesap-blok .bl-bas h2{color:#fff}
+  .hesap-blok .bl-etiket{color:var(--turuncu-acik)}
+  .hesap-blok .bl-bas p{color:rgba(255,255,255,.76)}
+
+  .hesap-kart{
+    position:relative;max-width:920px;margin:0 auto;
+    background:var(--beyaz);border-radius:22px;overflow:hidden;
+    box-shadow:var(--golge-l);
+    display:grid;grid-template-columns:1fr;
+  }
+  @media (min-width:820px){.hesap-kart{grid-template-columns:1.25fr .9fr}}
+
+  .hesap-form{padding:30px 26px}
+  @media (min-width:600px){.hesap-form{padding:36px 34px}}
+  .hesap-form h3{font-size:20px;font-weight:800;color:var(--lacivert-derin);margin-bottom:5px}
+  .hesap-form .ipucu{font-size:13.5px;color:var(--metin-yumusak);margin-bottom:24px}
+
+  .soru{margin-bottom:24px}
+  .soru > label{display:block;font-weight:700;font-size:14px;color:var(--metin);margin-bottom:11px}
+  .soru > label .kucuk{font-weight:500;color:var(--metin-yumusak);font-size:12.5px}
+
+  .secenekler{display:flex;flex-wrap:wrap;gap:9px}
+  .secenekler.dortlu{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  @media (max-width:440px){.secenekler.dortlu{grid-template-columns:repeat(2,1fr)}}
+  .secim{
+    position:relative;flex:1;min-width:0;
+    display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
+    padding:13px 10px;border-radius:12px;cursor:pointer;
+    border:2px solid var(--cizgi);background:var(--krem);
+    font-weight:700;font-size:14px;color:var(--metin);
+    transition:all .16s;user-select:none;
+  }
+  .secim small{display:block;font-weight:500;font-size:11px;color:var(--metin-yumusak)}
+  .secim:hover{border-color:var(--turuncu-acik);background:#fff}
+  .secim.aktif{
+    border-color:var(--turuncu);
+    background:linear-gradient(180deg,#fff7f0,#ffefe1);
+    color:var(--turuncu-koyu);
+    box-shadow:0 6px 16px rgba(255,122,26,.18);
+  }
+  .secim.aktif small{color:var(--turuncu-koyu)}
+  .secim .tik{
+    position:absolute;top:6px;right:7px;opacity:0;transform:scale(.6);
+    transition:all .16s;color:var(--turuncu)
+  }
+  .secim.aktif .tik{opacity:1;transform:scale(1)}
+
+  /* Sonuç paneli */
+  .hesap-sonuc{
+    background:linear-gradient(165deg,var(--lacivert-acik),var(--lacivert-derin));
+    color:#fff;padding:32px 28px;display:flex;flex-direction:column;
+    justify-content:center;position:relative;overflow:hidden;
+  }
+  .hesap-sonuc .kutu-desen{
+    position:absolute;inset:0;opacity:.12;pointer-events:none;
+    background-image:
+      linear-gradient(45deg,rgba(255,255,255,.6) 1px,transparent 1px),
+      linear-gradient(-45deg,rgba(255,255,255,.6) 1px,transparent 1px);
+    background-size:24px 24px;
+  }
+  .hesap-sonuc .sc-ic{position:relative}
+  .hesap-sonuc .sc-etiket{
+    font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--turuncu-acik);font-weight:800;margin-bottom:8px;
+  }
+  .hesap-sonuc .fiyat{
+    font-size:clamp(26px,5vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;margin-bottom:2px;
+  }
+  .hesap-sonuc .fiyat .tl{font-size:.62em;font-weight:700;opacity:.85}
+  .hesap-sonuc .fiyat-not{font-size:12.5px;color:rgba(255,255,255,.68);margin-bottom:20px}
+  .hesap-sonuc .ozet{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+    border-radius:12px;padding:13px 15px;margin-bottom:20px;font-size:13px;
+  }
+  .hesap-sonuc .ozet .satir{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+  .hesap-sonuc .ozet .satir span{color:rgba(255,255,255,.66)}
+  .hesap-sonuc .ozet .satir b{font-weight:700;text-align:right}
+  .hesap-sonuc .btn-wa{width:100%;justify-content:center;font-size:15.5px}
+  .hesap-sonuc .uyari-kk{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:14px;text-align:center;line-height:1.5}
+
+  /* ---------- Hizmetler ---------- */
+  .hiz-grid{display:grid;grid-template-columns:1fr;gap:18px}
+  @media (min-width:600px){.hiz-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:900px){.hiz-grid{grid-template-columns:repeat(3,1fr)}}
+  .hiz-kart{
+    background:#fff;border:1px solid var(--cizgi);border-radius:var(--radius);
+    padding:26px 24px;box-shadow:var(--golge-s);
+    transition:transform .18s,box-shadow .18s,border-color .18s;
+  }
+  .hiz-kart:hover{transform:translateY(-4px);box-shadow:var(--golge-m);border-color:var(--turuncu-acik)}
+  .hiz-kart .ik{
+    width:52px;height:52px;border-radius:13px;margin-bottom:16px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#fff2e7,#ffe2cc);color:var(--turuncu-koyu);
+  }
+  .hiz-kart h3{font-size:17.5px;font-weight:800;color:var(--lacivert-derin);margin-bottom:7px}
+  .hiz-kart p{font-size:14px;color:var(--metin-yumusak);line-height:1.55}
+
+  /* ---------- Neden biz ---------- */
+  .neden{background:#fff;border-top:1px solid var(--cizgi);border-bottom:1px solid var(--cizgi)}
+  .neden-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
+  @media (min-width:900px){.neden-grid{grid-template-columns:.9fr 1.1fr;gap:48px}}
+  .neden-gorsel{
+    position:relative;border-radius:20px;overflow:hidden;min-height:300px;
+    background:
+      radial-gradient(360px 260px at 70% 25%, rgba(255,154,77,.3), transparent 62%),
+      linear-gradient(155deg,#1d3663,#0e1b33);
+    border:1px solid rgba(14,27,51,.1);box-shadow:var(--golge-m);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .neden-gorsel .kutu-desen{
+    position:absolute;inset:0;opacity:.14;
+    background-image:
+      linear-gradient(45deg,rgba(255,255,255,.6) 1px,transparent 1px),
+      linear-gradient(-45deg,rgba(255,255,255,.6) 1px,transparent 1px);
+    background-size:26px 26px;
+  }
+  .neden-gorsel .rakam{position:relative;text-align:center}
+  .neden-gorsel .rakam b{display:block;font-size:52px;font-weight:800;line-height:1;color:var(--turuncu-acik)}
+  .neden-gorsel .rakam span{font-size:14px;opacity:.85;letter-spacing:.03em}
+  .neden-liste{display:flex;flex-direction:column;gap:20px}
+  .neden-liste . oge,.neden-liste .oge{display:flex;gap:15px}
+  .neden-liste .oge .ik{
+    width:46px;height:46px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,var(--lacivert),var(--lacivert-acik));color:#fff;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .neden-liste .oge h3{font-size:16.5px;font-weight:800;color:var(--lacivert-derin);margin-bottom:3px}
+  .neden-liste .oge p{font-size:14px;color:var(--metin-yumusak);line-height:1.55}
+
+  /* ---------- İletişim ---------- */
+  .iletisim{
+    background:linear-gradient(165deg,var(--lacivert-derin),var(--antrasit));color:#fff;
+    position:relative;overflow:hidden;
+  }
+  .iletisim .rota{
+    position:absolute;inset:0;opacity:.35;pointer-events:none;
+    background-image:linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:40px 100%;
+  }
+  .ilet-grid{position:relative;display:grid;grid-template-columns:1fr;gap:34px}
+  @media (min-width:840px){.ilet-grid{grid-template-columns:1fr 1fr;gap:48px}}
+  .ilet-sol h2{font-size:clamp(26px,4.4vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.14;margin-bottom:14px;text-wrap:balance}
+  .ilet-sol p{color:rgba(255,255,255,.78);font-size:16px;margin-bottom:26px;max-width:44ch}
+  .ilet-btnlar{display:flex;flex-wrap:wrap;gap:12px}
+  .ilet-bilgi{display:flex;flex-direction:column;gap:14px}
+  .ilet-satir{
+    display:flex;align-items:center;gap:15px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;padding:16px 18px;transition:background .2s,transform .15s;
+  }
+  a.ilet-satir:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
+  .ilet-satir .ik{
+    width:44px;height:44px;border-radius:11px;flex:none;
+    background:linear-gradient(135deg,var(--turuncu),var(--turuncu-koyu));color:#fff;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ilet-satir .yz b{display:block;font-size:15.5px;font-weight:800}
+  .ilet-satir .yz span{font-size:13px;color:rgba(255,255,255,.66)}
+  .ilet-not{margin-top:18px;font-size:12.5px;color:rgba(255,255,255,.5)}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--antrasit);color:rgba(255,255,255,.62);padding:38px 0 30px;text-align:center}
+  footer .marka{color:#fff;font-weight:800;font-size:17px;margin-bottom:6px}
+  footer .ornek-serit{
+    display:inline-flex;align-items:center;gap:9px;
+    background:rgba(255,122,26,.12);border:1px solid rgba(255,122,26,.32);
+    color:var(--turuncu-acik);font-weight:700;font-size:12.5px;
+    padding:9px 16px;border-radius:999px;margin:14px 0 18px;
+    max-width:100%;
+  }
+  footer .ornek-serit svg{flex:none}
+  footer .kucuk{font-size:12.5px;line-height:1.7;max-width:560px;margin-inline:auto}
+  footer .kucuk b{color:rgba(255,255,255,.85)}
+  footer .telsatir{margin-top:14px;font-size:13px}
+  footer .telsatir a{color:var(--turuncu-acik);font-weight:700}
+</style>
+</head>
+<body>
+
+  <!-- ÖRNEK ÇALIŞMA rozeti -->
+  <div class="rozet" title="Bu bir örnek/demo çalışmadır — kurgusal işletme">
+    <span class="nokta"></span>
+    <span>Örnek Çalışma <small>· Hatay Digital</small></span>
+  </div>
+
+  <!-- Üst menü -->
+  <header class="ust">
+    <div class="kapsul ust-ic">
+      <a href="#tepe" class="logo" aria-label="Antakya Nakliyat ana sayfa">
+        <span class="mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </span>
+        <span class="isim">Antakya Nakliyat<span>Evden Eve · Hatay</span></span>
+      </a>
+      <nav class="nav-link" aria-label="Bölümler">
+        <a href="#hesapla">Fiyat Hesapla</a>
+        <a href="#hizmetler">Hizmetler</a>
+        <a href="#neden">Neden Biz</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
+      <a class="ust-cta" href="tel:+905305957176">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>0530 595 71 76</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="tepe">
+    <div class="rota" aria-hidden="true"></div>
+    <div class="kapsul hero-ic">
+      <div class="hero-yazi">
+        <span class="hero-etiket"><b>Antakya Nakliyat</b> · Hatay ve çevresi</span>
+        <h1>Eşyalarınız güvenle, <em>tek kalemde</em> yeni evinize.</h1>
+        <p class="alt">Sigortalı ekip, tam donanımlı araç ve profesyonel paketleme. Sürprizsiz, net fiyat. Fiyatınızı aşağıdaki hesaplayıcıdan saniyeler içinde görün.</p>
+        <div class="hero-btnlar">
+          <a class="btn btn-wa" href="https://wa.me/905305957176?text=Merhaba%20Antakya%20Nakliyat%2C%20evden%20eve%20ta%C5%9F%C4%B1nma%20i%C3%A7in%20fiyat%20almak%20istiyorum." target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.8c2.17 0 4.21.85 5.75 2.38a8.1 8.1 0 0 1 2.38 5.74c0 4.54-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23zm4.52 10.48c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.24.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.48-.01c-.16 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+            WhatsApp'tan Fiyat Al
+          </a>
+          <a class="btn btn-cizgi" href="#hesapla">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+            Canlı Fiyat Hesapla
+          </a>
+        </div>
+        <div class="hero-guven">
+          <div class="gg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><b>Sigortalı</b>&nbsp;taşıma</div>
+          <div class="gg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><b>15+</b>&nbsp;yıl deneyim</div>
+          <div class="gg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><b>Aynı gün</b>&nbsp;keşif</div>
+        </div>
+      </div>
+
+      <!-- Hero görsel bloğu -->
+      <div class="hero-gorsel" aria-hidden="true">
+        <div class="kutu-desen"></div>
+        <div class="kamyon">
+          <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="kart-ic">
+          <span class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <span class="yz"><b>Paketleme dahil</b><span>Kırılacaklar özenle, tek tek</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HESAPLAYICI -->
+  <section class="hesap-blok" id="hesapla">
+    <div class="rota" aria-hidden="true"></div>
+    <div class="kapsul">
+      <div class="bl-bas">
+        <span class="bl-etiket">Rakiplerde yok</span>
+        <h2>Canlı Fiyat Hesaplayıcı</h2>
+        <p>Birkaç seçim yapın, tahmini fiyat aralığınızı anında görün. Beğenirseniz net fiyat için seçimlerinizle birlikte WhatsApp'a tek tıkla iletin.</p>
+      </div>
+
+      <div class="hesap-kart">
+        <!-- Form -->
+        <div class="hesap-form">
+          <h3>Taşınma detayları</h3>
+          <p class="ipucu">Aşağıdaki seçenekleri işaretledikçe fiyat güncellenir.</p>
+
+          <div class="soru">
+            <label>Evinizin tipi</label>
+            <div class="secenekler dortlu" data-grup="daire">
+              <div class="secim" data-deger="1+1">1+1<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="2+1">2+1<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="3+1">3+1<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="4+1">4+1<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+            </div>
+          </div>
+
+          <div class="soru">
+            <label>Bulunduğunuz kat <span class="kucuk">(taşınacak ev)</span></label>
+            <div class="secenekler dortlu" data-grup="kat">
+              <div class="secim" data-deger="zemin">Zemin / 1<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="2-3">2 – 3<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="4-6">4 – 6<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="7+">7 ve üzeri<span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+            </div>
+          </div>
+
+          <div class="soru">
+            <label>Binada asansör</label>
+            <div class="secenekler" data-grup="asansor">
+              <div class="secim" data-deger="var">Var<small>eşya asansörden</small><span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="yok">Yok<small>dış cephe asansörü</small><span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+            </div>
+          </div>
+
+          <div class="soru" style="margin-bottom:0">
+            <label>Taşınma mesafesi</label>
+            <div class="secenekler" data-grup="mesafe">
+              <div class="secim" data-deger="ilici">İl içi<small>Hatay geneli</small><span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+              <div class="secim" data-deger="sehirlerarasi">Şehirlerarası<small>başka ile</small><span class="tik" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sonuç -->
+        <div class="hesap-sonuc">
+          <div class="kutu-desen" aria-hidden="true"></div>
+          <div class="sc-ic">
+            <div class="sc-etiket">Tahmini fiyat aralığı</div>
+            <div class="fiyat" id="fiyat-goster" aria-live="polite">— <span class="tl"></span></div>
+            <div class="fiyat-not" id="fiyat-not">Başlamak için soldan seçim yapın.</div>
+
+            <div class="ozet" id="ozet-kutu">
+              <div class="satir"><span>Ev tipi</span><b id="oz-daire">—</b></div>
+              <div class="satir"><span>Kat</span><b id="oz-kat">—</b></div>
+              <div class="satir"><span>Asansör</span><b id="oz-asansor">—</b></div>
+              <div class="satir"><span>Mesafe</span><b id="oz-mesafe">—</b></div>
+            </div>
+
+            <a class="btn btn-wa" id="wa-buton" href="https://wa.me/905305957176?text=Merhaba%20Antakya%20Nakliyat%2C%20evden%20eve%20ta%C5%9F%C4%B1nma%20i%C3%A7in%20fiyat%20almak%20istiyorum." target="_blank" rel="noopener">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.8c2.17 0 4.21.85 5.75 2.38a8.1 8.1 0 0 1 2.38 5.74c0 4.54-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23zm4.52 10.48c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.24.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.48-.01c-.16 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+              Net Fiyat İçin WhatsApp'tan Yaz
+            </a>
+            <p class="uyari-kk">Bu tutar bilgilendirme amaçlı tahmindir. Kesin fiyat, ücretsiz keşif sonrası netleşir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HİZMETLER -->
+  <section id="hizmetler">
+    <div class="kapsul">
+      <div class="bl-bas">
+        <span class="bl-etiket">Hizmetlerimiz</span>
+        <h2>Taşınmanın her adımı bizde</h2>
+        <p>Paketlemeden yerleştirmeye kadar tek elden, tek fiyatla.</p>
+      </div>
+      <div class="hiz-grid">
+        <div class="hiz-kart">
+          <span class="ik"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <h3>Evden Eve Nakliyat</h3>
+          <p>Sökme, taşıma ve yeni evde kurulum dahil eksiksiz taşınma. Eşyanız çıktığı gibi yerine kurulur.</p>
+        </div>
+        <div class="hiz-kart">
+          <span class="ik"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h6M3 15h6"/></svg></span>
+          <h3>Ofis &amp; İşyeri Taşıma</h3>
+          <p>Mesai kaybını en aza indiren planlı ofis taşıma. Dosya, mobilya ve ekipman etiketlenerek taşınır.</p>
+        </div>
+        <div class="hiz-kart">
+          <span class="ik"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7"/><rect x="4" y="14" width="16" height="7" rx="1"/></svg></span>
+          <h3>Asansörlü Taşıma</h3>
+          <p>Yüksek katlar için dış cephe asansörü. Ağır eşyalar merdivenden değil, pencereden güvenle iner.</p>
+        </div>
+        <div class="hiz-kart">
+          <span class="ik"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>
+          <h3>Profesyonel Paketleme</h3>
+          <p>Baloncuklu naylon, koli ve battaniye ile kırılacak eşyalar tek tek sarılır. İsterseniz sadece paketleme.</p>
+        </div>
+        <div class="hiz-kart">
+          <span class="ik"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7l-8-4-8 4 8 4 8-4z"/><path d="M4 7v10l8 4 8-4V7"/><path d="M12 11v10"/></svg></span>
+          <h3>Depolama</h3>
+          <p>Ara dönemde eşyalarınız için güvenli, nem kontrollü depo. Günlük ya da aylık, esnek sürelerle.</p>
+        </div>
+        <div class="hiz-kart">
+          <span class="ik"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <h3>Aynı Gün Keşif</h3>
+          <p>Randevu verin, ekibimiz gelip eşyalarınızı görsün. Keşif ücretsiz, fiyat net ve yazılıdır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEDEN BİZ -->
+  <section class="neden" id="neden">
+    <div class="kapsul">
+      <div class="bl-bas">
+        <span class="bl-etiket">Neden Antakya Nakliyat</span>
+        <h2>Ucuz değil, doğru fiyat. Söz değil, garanti.</h2>
+        <p>Taşınma stresli olabilir; bizimle olmasın diye çalışıyoruz.</p>
+      </div>
+      <div class="neden-grid">
+        <div class="neden-gorsel" aria-hidden="true">
+          <div class="kutu-desen"></div>
+          <div class="rakam">
+            <b>2.500+</b>
+            <span>tamamlanan taşınma</span>
+          </div>
+        </div>
+        <div class="neden-liste">
+          <div class="oge">
+            <span class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <div>
+              <h3>Sigortalı Taşıma</h3>
+              <p>Eşyalarınız yola çıktığı andan itibaren sigorta kapsamında. Olası bir hasarda arkanızdayız.</p>
+            </div>
+          </div>
+          <div class="oge">
+            <span class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div>
+              <h3>Deneyimli, Eğitimli Ekip</h3>
+              <p>Piyasadan toplama değil, kendi kadromuz. Mobilya sökme-kurmada ustalaşmış, üniformalı ekip.</p>
+            </div>
+          </div>
+          <div class="oge">
+            <span class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <div>
+              <h3>Sürprizsiz, Net Fiyat</h3>
+              <p>Keşifte konuştuğumuz fiyat, taşınma bittiğinde de aynıdır. Sonradan ek ücret çıkarmayız.</p>
+            </div>
+          </div>
+          <div class="oge">
+            <span class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+            <div>
+              <h3>Tam Donanımlı Araç</h3>
+              <p>Kapalı kasa, battaniyeli ve askılı-dolap düzenli araçlar. Eşyalarınız yolda savrulmaz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section class="iletisim" id="iletisim">
+    <div class="rota" aria-hidden="true"></div>
+    <div class="kapsul ilet-grid">
+      <div class="ilet-sol">
+        <h2>Taşınmanıza bugün başlayalım.</h2>
+        <p>Bir mesaj ya da bir telefon yeterli. Aynı gün keşif için hemen ulaşın, ücretsiz fiyat verelim.</p>
+        <div class="ilet-btnlar">
+          <a class="btn btn-wa" href="https://wa.me/905305957176?text=Merhaba%20Antakya%20Nakliyat%2C%20ta%C5%9F%C4%B1nma%20i%C3%A7in%20bilgi%20ve%20fiyat%20almak%20istiyorum." target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.8c2.17 0 4.21.85 5.75 2.38a8.1 8.1 0 0 1 2.38 5.74c0 4.54-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23zm4.52 10.48c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.24.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.48-.01c-.16 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+            WhatsApp'tan Yaz
+          </a>
+          <a class="btn btn-turuncu" href="tel:+905305957176">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Hemen Ara
+          </a>
+        </div>
+        <p class="ilet-not">Çalışma saatleri: Her gün 08.00 – 20.00 · Hafta sonu taşınma mümkün.</p>
+      </div>
+      <div class="ilet-bilgi">
+        <a class="ilet-satir" href="tel:+905305957176">
+          <span class="ik"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span class="yz"><b>0530 595 71 76</b><span>Telefon &amp; WhatsApp</span></span>
+        </a>
+        <div class="ilet-satir">
+          <span class="ik"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="yz"><b>Antakya, Hatay</b><span>Hatay geneli ve şehirlerarası hizmet</span></span>
+        </div>
+        <div class="ilet-satir">
+          <span class="ik"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="yz"><b>Ücretsiz Keşif</b><span>Aynı gün randevu, yazılı net fiyat</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="kapsul">
+      <div class="marka">Antakya Nakliyat</div>
+      <div style="font-size:13px;opacity:.7">Evden Eve Nakliyat · Antakya, Hatay · 0530 595 71 76</div>
+      <div class="ornek-serit">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        ÖRNEK ÇALIŞMA — kurgusal işletme, gerçek müşteri değildir
+      </div>
+      <p class="kucuk">
+        Bu site, <b>Hatay Digital</b> ajansının nakliyat sektörü için hazırladığı bir <b>örnek/demo vitrindir</b>. "Antakya Nakliyat" kurgusal bir işletmedir; adres, rakamlar ve fiyatlar temsilidir. Fiyat hesaplayıcı örnek amaçlıdır ve gerçek teklif niteliği taşımaz.
+      </p>
+      <p class="telsatir">Tasarım &amp; geliştirme: <b style="color:#fff">Hatay Digital</b> — İşiniz için benzeri: <a href="tel:+905305957176">0530 595 71 76</a></p>
+    </div>
+  </footer>
+
+  <!-- Sabit mobil alt bar -->
+  <div class="alt-bar">
+    <a class="wa" href="https://wa.me/905305957176?text=Merhaba%20Antakya%20Nakliyat%2C%20ta%C5%9F%C4%B1nma%20i%C3%A7in%20fiyat%20almak%20istiyorum." target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+      WhatsApp
+    </a>
+    <a class="ara" href="tel:+905305957176">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Ara
+    </a>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  // Kurgusal ama mantıklı fiyat modeli (TL). Sadece tahmin.
+  var TABAN = {
+    "1+1": 4500,
+    "2+1": 6500,
+    "3+1": 9000,
+    "4+1": 12500
+  };
+  var KAT_EK = {           // asansör YOK iken kat başına yük etkisi
+    "zemin": 0,
+    "2-3":   800,
+    "4-6":   1800,
+    "7+":    3000
+  };
+  var KAT_ETIKET = {
+    "zemin": "Zemin / 1. kat",
+    "2-3":   "2 – 3. kat",
+    "4-6":   "4 – 6. kat",
+    "7+":    "7 ve üzeri kat"
+  };
+  var MESAFE_ETIKET = {
+    "ilici": "İl içi (Hatay)",
+    "sehirlerarasi": "Şehirlerarası"
+  };
+  var ASANSOR_ETIKET = { "var":"Var", "yok":"Yok" };
+
+  var secim = { daire:null, kat:null, asansor:null, mesafe:null };
+
+  var fiyatGoster = document.getElementById("fiyat-goster");
+  var fiyatNot    = document.getElementById("fiyat-not");
+  var waButon     = document.getElementById("wa-buton");
+  var ozDaire     = document.getElementById("oz-daire");
+  var ozKat       = document.getElementById("oz-kat");
+  var ozAsansor   = document.getElementById("oz-asansor");
+  var ozMesafe    = document.getElementById("oz-mesafe");
+
+  var WA_BASE = "https://wa.me/905305957176?text=";
+
+  function tlBicim(n){
+    // 4500 -> "4.500"
+    return n.toLocaleString("tr-TR");
+  }
+
+  function hesapla(){
+    // Özet daima güncellenir
+    ozDaire.textContent   = secim.daire ? secim.daire : "—";
+    ozKat.textContent     = secim.kat ? KAT_ETIKET[secim.kat] : "—";
+    ozAsansor.textContent = secim.asansor ? ASANSOR_ETIKET[secim.asansor] : "—";
+    ozMesafe.textContent  = secim.mesafe ? MESAFE_ETIKET[secim.mesafe] : "—";
+
+    var tamam = secim.daire && secim.kat && secim.asansor && secim.mesafe;
+    if(!tamam){
+      fiyatGoster.innerHTML = '&mdash; <span class="tl"></span>';
+      fiyatNot.textContent = "Fiyat için dört seçimi de tamamlayın.";
+      guncelleWa(false);
+      return;
+    }
+
+    var taban = TABAN[secim.daire];
+
+    // Kat etkisi: asansör varsa çok küçük, yoksa tam yansır
+    var katYuku = KAT_EK[secim.kat];
+    if(secim.asansor === "var"){
+      katYuku = Math.round(katYuku * 0.25);
+    }
+    var ara = taban + katYuku;
+
+    // Mesafe çarpanı
+    if(secim.mesafe === "sehirlerarasi"){
+      ara = Math.round(ara * 1.55) + 2500;   // yol + km bedeli
+    }
+
+    // +/- %12 aralık, 250'ye yuvarla
+    var alt = Math.round((ara * 0.90) / 250) * 250;
+    var ust = Math.round((ara * 1.14) / 250) * 250;
+
+    fiyatGoster.innerHTML = tlBicim(alt) + " &ndash; " + tlBicim(ust) + ' <span class="tl">TL</span>';
+    fiyatNot.textContent = "Seçimlerinize göre tahmini aralık. Net fiyat keşifte belli olur.";
+
+    guncelleWa(true, alt, ust);
+  }
+
+  function guncelleWa(tamam, alt, ust){
+    var msg;
+    if(tamam){
+      msg =
+        "Merhaba Antakya Nakliyat, hesaplayıcıdan fiyat aldım. Detaylarım:\n" +
+        "• Ev tipi: " + secim.daire + "\n" +
+        "• Kat: " + KAT_ETIKET[secim.kat] + "\n" +
+        "• Asansör: " + ASANSOR_ETIKET[secim.asansor] + "\n" +
+        "• Mesafe: " + MESAFE_ETIKET[secim.mesafe] + "\n" +
+        "• Tahmini aralık: " + tlBicim(alt) + " – " + tlBicim(ust) + " TL\n" +
+        "Net fiyat ve keşif için bilgi verir misiniz?";
+    } else {
+      msg = "Merhaba Antakya Nakliyat, evden eve taşınma için fiyat almak istiyorum.";
+    }
+    waButon.setAttribute("href", WA_BASE + encodeURIComponent(msg));
+  }
+
+  // Seçim tıklamaları
+  var gruplar = document.querySelectorAll("[data-grup]");
+  gruplar.forEach(function(grup){
+    var ad = grup.getAttribute("data-grup");
+    var secenekler = grup.querySelectorAll(".secim");
+    secenekler.forEach(function(el){
+      el.setAttribute("role","button");
+      el.setAttribute("tabindex","0");
+      function sec(){
+        secenekler.forEach(function(s){ s.classList.remove("aktif"); });
+        el.classList.add("aktif");
+        secim[ad] = el.getAttribute("data-deger");
+        hesapla();
+      }
+      el.addEventListener("click", sec);
+      el.addEventListener("keydown", function(e){
+        if(e.key === "Enter" || e.key === " "){ e.preventDefault(); sec(); }
+      });
+    });
+  });
+
+  hesapla();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antakya Oto Servis — Aracın Emin Ellerde</title>
+<meta name="description" content="Antakya Oto Servis: periyodik bakım, motor, fren, lastik-balans-rot, klima, akü ve yağ değişimi. Garantili işçilik, orijinal parça, hızlı teslim. WhatsApp'tan randevu ve fiyat alın.">
+<style>
+  :root{
+    --ink:#12151b;        /* graphite */
+    --steel:#1c222c;      /* panel */
+    --steel-2:#242b37;
+    --line:#333c4a;
+    --ground:#eef1f5;     /* cool off-white */
+    --ground-2:#e2e7ee;
+    --card:#ffffff;
+    --muted:#5a6472;
+    --muted-2:#8a94a3;
+    --blue:#2f6bd6;       /* instrument blue */
+    --blue-ink:#1f4fa8;
+    --yellow:#f5b21a;     /* hazard */
+    --yellow-deep:#d99406;
+    --green:#1f9d5f;      /* whatsapp / open */
+    --green-deep:#177a49;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(18,21,27,.06),0 8px 30px rgba(18,21,27,.08);
+    --shadow-lg:0 20px 60px rgba(18,21,27,.22);
+    --wrap:1120px;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--ground);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance}
+  p{margin:0}
+  .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
+  .eyebrow{
+    font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--blue);display:inline-flex;align-items:center;gap:.55em;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--yellow);display:inline-block;border-radius:2px}
+
+  /* ---------- Sample badge ---------- */
+  .sample-badge{
+    position:fixed;top:12px;right:12px;z-index:60;
+    display:inline-flex;align-items:center;gap:.5em;
+    background:rgba(18,21,27,.82);color:#fff;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(245,178,26,.55);
+    padding:7px 12px;border-radius:999px;
+    font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    box-shadow:0 6px 20px rgba(0,0,0,.22);
+  }
+  .sample-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 3px rgba(245,178,26,.22)}
+  .sample-badge b{color:var(--yellow);font-weight:800}
+  @media(max-width:520px){
+    .sample-badge{font-size:.58rem;padding:6px 10px;top:10px;right:10px}
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(238,241,245,.82);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--ground-2);
+  }
+  .nav{display:flex;align-items:center;gap:16px;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.01em}
+  .brand .mark{
+    width:38px;height:38px;border-radius:10px;flex:none;
+    background:linear-gradient(135deg,var(--steel),var(--ink));
+    display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 4px 12px rgba(18,21,27,.25);
+  }
+  .brand .mark svg{width:22px;height:22px}
+  .brand .txt{display:flex;flex-direction:column;line-height:1.05}
+  .brand .txt b{font-size:1rem}
+  .brand .txt span{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .nav-links{display:none;margin-left:auto;gap:26px;align-items:center}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--muted);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+    font-weight:700;font-size:.92rem;border-radius:11px;padding:11px 18px;
+    cursor:pointer;border:1px solid transparent;transition:transform .12s ease,box-shadow .12s ease,background .15s;
+    white-space:nowrap;
+  }
+  .btn svg{width:18px;height:18px;flex:none}
+  .btn:active{transform:translateY(1px)}
+  .btn-wa{background:var(--green);color:#fff;box-shadow:0 6px 18px rgba(31,157,95,.28)}
+  .btn-wa:hover{background:var(--green-deep)}
+  .btn-yellow{background:var(--yellow);color:var(--ink);box-shadow:0 6px 18px rgba(245,178,26,.34)}
+  .btn-yellow:hover{background:var(--yellow-deep)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{background:var(--card)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark:hover{background:#000}
+  .nav .btn-wa.compact{padding:9px 14px}
+  /* reserve top-right clearance so the fixed sample badge never covers header actions */
+  .nav{padding-right:210px}
+  @media(min-width:900px){
+    .nav-links{display:flex}
+    .nav-cta{margin-left:0}
+  }
+  @media(max-width:520px){
+    .nav{padding-right:150px}
+    .nav .btn-wa.compact ._lbl{display:none}
+    .nav .btn-wa.compact{padding:9px 11px}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;color:#eef1f5;overflow:hidden;
+    background:
+      radial-gradient(1000px 500px at 78% -10%,rgba(47,107,214,.30),transparent 60%),
+      radial-gradient(700px 420px at 0% 110%,rgba(245,178,26,.14),transparent 55%),
+      linear-gradient(160deg,#171c25 0%,#12151b 60%,#0d1015 100%);
+  }
+  /* diamond-plate texture overlay */
+  .hero::before{
+    content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 2px,transparent 2px 14px),
+      repeating-linear-gradient(-45deg,rgba(255,255,255,.03) 0 2px,transparent 2px 14px);
+    mask:linear-gradient(180deg,#000,transparent 78%);
+    -webkit-mask:linear-gradient(180deg,#000,transparent 78%);
+  }
+  .hero-inner{position:relative;padding:52px 0 64px;display:grid;gap:38px}
+  .hero-copy{max-width:640px}
+  .hero .eyebrow{color:var(--yellow)}
+  .hero .eyebrow::before{background:var(--yellow)}
+  .hero h1{
+    font-size:clamp(2.15rem,7vw,3.6rem);font-weight:800;letter-spacing:-.02em;margin-top:16px;
+  }
+  .hero h1 .hl{color:var(--yellow)}
+  .hero .lead{margin-top:16px;font-size:clamp(1rem,2.6vw,1.18rem);color:#b8c1cf;max-width:52ch}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .hero-cta .btn{padding:14px 22px;font-size:1rem}
+  .trust-row{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px}
+  .trust-row .ti{display:flex;align-items:center;gap:8px;font-size:.85rem;color:#c4cdda;font-weight:600}
+  .trust-row .ti svg{width:17px;height:17px;color:var(--yellow);flex:none}
+
+  /* hero photo blocks (CSS-only, no real images) */
+  .hero-media{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:300px}
+  .ph{
+    position:relative;border-radius:14px;overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 12px 40px rgba(0,0,0,.35);
+  }
+  .ph .lbl{
+    position:absolute;left:12px;bottom:11px;z-index:2;
+    font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:#fff;background:rgba(18,21,27,.5);padding:5px 9px;border-radius:8px;
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  }
+  .ph.big{grid-row:1 / span 2}
+  .ph-1{background:
+      radial-gradient(120% 120% at 20% 0%,rgba(47,107,214,.5),transparent 55%),
+      repeating-linear-gradient(115deg,#20293a 0 22px,#1a2130 22px 44px);}
+  .ph-2{background:
+      radial-gradient(140% 120% at 90% 10%,rgba(245,178,26,.42),transparent 60%),
+      linear-gradient(135deg,#2a323f,#1b2230);}
+  .ph-3{background:
+      conic-gradient(from 210deg at 60% 40%,#28313f,#1c2431,#2f3a4a,#1c2431);}
+  .ph::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(80% 60% at 50% 0%,rgba(255,255,255,.06),transparent 70%);
+  }
+  /* gear motif on big block */
+  .ph.big .gear{position:absolute;top:-24px;right:-24px;width:150px;height:150px;opacity:.16;color:#fff}
+  @media(min-width:860px){
+    .hero-inner{grid-template-columns:1.05fr .95fr;align-items:center;padding:64px 0 76px}
+    .hero-media{height:360px}
+  }
+
+  /* ---------- Emergency strip ---------- */
+  .emergency{
+    background:var(--ink);color:#fff;position:relative;overflow:hidden;
+  }
+  .emergency::before{
+    content:"";position:absolute;inset:0;height:4px;top:auto;bottom:0;
+    background:repeating-linear-gradient(45deg,var(--yellow) 0 16px,#12151b 16px 32px);
+    opacity:.9;
+  }
+  .emergency::after{
+    content:"";position:absolute;left:0;right:0;top:0;height:4px;
+    background:repeating-linear-gradient(45deg,var(--yellow) 0 16px,#12151b 16px 32px);
+    opacity:.9;
+  }
+  .emergency .wrap{
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;padding:22px 20px;
+  }
+  .emergency .ico{
+    width:46px;height:46px;flex:none;border-radius:12px;display:grid;place-items:center;
+    background:rgba(245,178,26,.14);border:1px solid rgba(245,178,26,.4);color:var(--yellow);
+  }
+  .emergency .ico svg{width:24px;height:24px}
+  .emergency .txt{flex:1;min-width:200px}
+  .emergency .txt b{display:block;font-size:1.05rem;font-weight:800;letter-spacing:-.01em}
+  .emergency .txt span{font-size:.9rem;color:#b8c1cf}
+  .emergency .btn{flex:none}
+
+  /* ---------- Section shell ---------- */
+  section{padding:66px 0}
+  .sec-head{max-width:640px;margin-bottom:38px}
+  .sec-head h2{font-size:clamp(1.6rem,4.6vw,2.35rem);font-weight:800;letter-spacing:-.02em;margin-top:12px}
+  .sec-head p{margin-top:12px;color:var(--muted);font-size:1.02rem}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--ground)}
+  .svc-grid{display:grid;grid-template-columns:1fr;gap:14px}
+  .svc{
+    background:var(--card);border:1px solid var(--ground-2);border-radius:var(--radius);
+    padding:22px;box-shadow:var(--shadow);transition:transform .16s ease,box-shadow .16s ease,border-color .16s;
+    position:relative;overflow:hidden;
+  }
+  .svc::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--yellow);
+    transform:scaleY(0);transform-origin:top;transition:transform .2s ease;
+  }
+  .svc:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:#cdd5e0}
+  .svc:hover::before{transform:scaleY(1)}
+  .svc .ico{
+    width:50px;height:50px;border-radius:12px;display:grid;place-items:center;margin-bottom:14px;
+    background:linear-gradient(135deg,var(--steel-2),var(--ink));color:var(--yellow);
+    box-shadow:0 6px 16px rgba(18,21,27,.2);
+  }
+  .svc .ico svg{width:26px;height:26px}
+  .svc h3{font-size:1.12rem;font-weight:800;letter-spacing:-.01em}
+  .svc p{margin-top:7px;color:var(--muted);font-size:.94rem}
+  @media(min-width:640px){.svc-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:980px){.svc-grid{grid-template-columns:1fr 1fr 1fr}}
+
+  /* ---------- Why us ---------- */
+  .why{background:var(--steel);color:#eef1f5;position:relative;overflow:hidden}
+  .why::before{
+    content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
+    background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 2px,transparent 2px 16px);
+    mask:radial-gradient(80% 80% at 80% 0%,#000,transparent 70%);
+    -webkit-mask:radial-gradient(80% 80% at 80% 0%,#000,transparent 70%);
+  }
+  .why .wrap{position:relative}
+  .why .sec-head .eyebrow{color:var(--yellow)}
+  .why .sec-head .eyebrow::before{background:var(--yellow)}
+  .why .sec-head p{color:#aeb8c6}
+  .why-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .why-card{
+    display:flex;gap:16px;padding:22px;border-radius:var(--radius);
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  }
+  .why-card .n{
+    width:44px;height:44px;flex:none;border-radius:11px;display:grid;place-items:center;
+    background:rgba(245,178,26,.14);border:1px solid rgba(245,178,26,.35);color:var(--yellow);
+  }
+  .why-card .n svg{width:22px;height:22px}
+  .why-card h3{font-size:1.06rem;font-weight:800}
+  .why-card p{margin-top:6px;color:#aeb8c6;font-size:.93rem}
+  @media(min-width:760px){.why-grid{grid-template-columns:1fr 1fr 1fr}}
+
+  /* ---------- Info: hours + location ---------- */
+  .info{background:var(--ground)}
+  .info-grid{display:grid;grid-template-columns:1fr;gap:22px}
+  .panel{
+    background:var(--card);border:1px solid var(--ground-2);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .panel-head{
+    display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--ground-2);
+  }
+  .panel-head .pi{
+    width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;
+    background:var(--ground);color:var(--blue);border:1px solid var(--ground-2);
+  }
+  .panel-head .pi svg{width:21px;height:21px}
+  .panel-head h3{font-size:1.1rem;font-weight:800}
+  .panel-head .status{
+    margin-left:auto;display:inline-flex;align-items:center;gap:6px;
+    font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--green-deep);background:rgba(31,157,95,.1);border:1px solid rgba(31,157,95,.28);
+    padding:5px 10px;border-radius:999px;
+  }
+  .status .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(31,157,95,.2)}
+
+  /* hours table */
+  .hours{padding:8px 10px 14px}
+  .hours .row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:11px 12px;border-radius:9px;font-size:.95rem;
+  }
+  .hours .row + .row{border-top:1px solid var(--ground-2)}
+  .hours .row .d{font-weight:600;color:var(--ink)}
+  .hours .row .h{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+  .hours .row.today{background:rgba(245,178,26,.1);border-radius:9px}
+  .hours .row.today + .row{border-top-color:transparent}
+  .hours .row.today .d{color:var(--yellow-deep);font-weight:800}
+  .hours .row.today .h{color:var(--ink)}
+  .hours .row.closed .h{color:#b23c3c;font-weight:700}
+  .hours .today-tag{
+    font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--yellow);color:var(--ink);padding:2px 7px;border-radius:6px;margin-left:8px;
+  }
+
+  /* location / map placeholder */
+  .map{
+    height:220px;position:relative;
+    background:
+      linear-gradient(0deg,rgba(18,21,27,.06),rgba(18,21,27,.06)),
+      repeating-linear-gradient(0deg,#dfe5ee 0 1px,transparent 1px 40px),
+      repeating-linear-gradient(90deg,#dfe5ee 0 1px,transparent 1px 40px),
+      linear-gradient(135deg,#eef2f7,#e3e9f1);
+  }
+  .map .road-a{position:absolute;left:0;right:0;top:44%;height:14px;background:#cdd6e2;transform:rotate(-4deg)}
+  .map .road-b{position:absolute;top:0;bottom:0;left:58%;width:12px;background:#cdd6e2}
+  .map .pin{
+    position:absolute;left:56%;top:42%;transform:translate(-50%,-100%);
+    color:var(--blue);filter:drop-shadow(0 6px 10px rgba(31,79,168,.4));
+  }
+  .map .pin svg{width:40px;height:40px}
+  .map .pin .ping{
+    position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+    width:16px;height:16px;border-radius:50%;background:rgba(47,107,214,.25);
+    animation:ping 2.2s ease-out infinite;
+  }
+  @keyframes ping{0%{transform:translateX(-50%) scale(.5);opacity:.8}100%{transform:translateX(-50%) scale(2.6);opacity:0}}
+  @media(prefers-reduced-motion:reduce){.map .pin .ping{animation:none}}
+  .addr{padding:18px 22px;display:flex;flex-direction:column;gap:14px}
+  .addr .line{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:var(--ink)}
+  .addr .line svg{width:19px;height:19px;color:var(--blue);flex:none;margin-top:2px}
+  .addr .line b{font-weight:700}
+  .addr .line span{color:var(--muted)}
+  .addr .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:2px}
+  @media(min-width:900px){.info-grid{grid-template-columns:1fr 1fr}}
+
+  /* ---------- Contact CTA ---------- */
+  .contact{
+    background:
+      radial-gradient(800px 400px at 85% 0%,rgba(47,107,214,.22),transparent 60%),
+      linear-gradient(160deg,#161b24,#12151b);
+    color:#eef1f5;text-align:center;
+  }
+  .contact .inner{max-width:620px;margin:0 auto}
+  .contact .eyebrow{color:var(--yellow);justify-content:center}
+  .contact .eyebrow::before{background:var(--yellow)}
+  .contact h2{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em;margin-top:14px}
+  .contact p{margin-top:14px;color:#b8c1cf;font-size:1.05rem}
+  .contact .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+  .contact .cta .btn{padding:14px 24px;font-size:1rem}
+  .contact .phone{
+    margin-top:22px;display:inline-flex;align-items:center;gap:10px;
+    font-size:1.35rem;font-weight:800;letter-spacing:.01em;color:#fff;font-variant-numeric:tabular-nums;
+  }
+  .contact .phone svg{width:22px;height:22px;color:var(--yellow)}
+
+  /* ---------- Footer ---------- */
+  footer.site{background:#0d1015;color:#8a94a3;padding:44px 0 120px}
+  .foot-grid{display:grid;grid-template-columns:1fr;gap:26px}
+  .foot-brand{display:flex;align-items:center;gap:11px;color:#eef1f5;font-weight:800}
+  .foot-brand .mark{width:34px;height:34px;border-radius:9px;flex:none;background:linear-gradient(135deg,var(--steel),#000);display:grid;place-items:center}
+  .foot-brand .mark svg{width:19px;height:19px}
+  .foot-col h4{color:#c4cdda;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px}
+  .foot-col a,.foot-col p{display:block;font-size:.92rem;color:#8a94a3;margin-bottom:8px;transition:color .15s}
+  .foot-col a:hover{color:var(--yellow)}
+  .foot-note{
+    margin-top:34px;padding-top:22px;border-top:1px solid #1c222c;
+    font-size:.82rem;color:#6c7686;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;
+  }
+  .foot-sample{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(245,178,26,.08);border:1px solid rgba(245,178,26,.28);
+    color:#d8b25c;padding:8px 14px;border-radius:10px;font-size:.82rem;font-weight:600;line-height:1.4;
+  }
+  .foot-sample svg{width:16px;height:16px;flex:none;color:var(--yellow)}
+  @media(min-width:760px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr}}
+
+  /* ---------- Floating WhatsApp ---------- */
+  .fab{
+    position:fixed;right:16px;bottom:16px;z-index:55;
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--green);color:#fff;font-weight:800;font-size:.95rem;
+    padding:13px 18px 13px 15px;border-radius:999px;
+    box-shadow:0 12px 30px rgba(31,157,95,.42),0 2px 6px rgba(0,0,0,.2);
+    transition:transform .14s ease,box-shadow .14s ease;
+  }
+  .fab svg{width:24px;height:24px;flex:none}
+  .fab:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(31,157,95,.5)}
+  .fab .label{display:none}
+  @media(min-width:520px){.fab .label{display:inline}}
+  @media(prefers-reduced-motion:no-preference){
+    .fab{animation:fabIn .5s .6s both}
+    @keyframes fabIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+  }
+
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<!-- Sample-work badge (always visible) -->
+<div class="sample-badge" role="note" aria-label="Örnek çalışma">
+  <span class="dot" aria-hidden="true"></span>
+  ÖRNEK ÇALIŞMA · <b>Hatay Digital</b>
+</div>
+
+<!-- Header -->
+<header class="site">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="#tepe" aria-label="Antakya Oto Servis ana sayfa">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f5b21a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </span>
+        <span class="txt"><b>Antakya Oto Servis</b><span>Bakım · Onarım · Lastik</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#hizmetler">Hizmetler</a>
+        <a href="#neden">Neden Biz</a>
+        <a href="#saatler">Saatler</a>
+        <a href="#iletisim">İletişim</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-wa compact" href="https://wa.me/905305957176?text=Merhaba%2C%20arac%C4%B1m%20i%C3%A7in%20randevu%20ve%20fiyat%20bilgisi%20almak%20istiyorum." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.42 1.27 4.86L2 22l5.28-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          <span class="_lbl">WhatsApp</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<main id="tepe">
+<section class="hero" aria-label="Tanıtım">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Antakya · Oto Servis &amp; Lastik</span>
+        <h1>Aracın <span class="hl">emin ellerde.</span></h1>
+        <p class="lead">Periyodik bakımdan motor onarımına, fren ve lastikten klima ve aküye — Antakya'nın deneyimli ustaları arıza tespitini net yapar, işi zamanında teslim eder. Şeffaf fiyat, garantili işçilik.</p>
+        <div class="hero-cta">
+          <a class="btn btn-wa" href="https://wa.me/905305957176?text=Merhaba%2C%20arac%C4%B1m%20i%C3%A7in%20randevu%20ve%20fiyat%20bilgisi%20almak%20istiyorum.%20Ara%C3%A7%3A%20" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.42 1.27 4.86L2 22l5.28-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            WhatsApp'tan Randevu / Fiyat Al
+          </a>
+          <a class="btn btn-ghost" href="tel:+905305957176" style="color:#eef1f5;border-color:rgba(255,255,255,.22)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            0530 595 71 76
+          </a>
+        </div>
+        <div class="trust-row">
+          <span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Garantili işçilik</span>
+          <span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Orijinal &amp; muadil parça</span>
+          <span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Aynı gün teslim</span>
+        </div>
+      </div>
+
+      <div class="hero-media" aria-hidden="true">
+        <div class="ph big ph-1">
+          <svg class="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="lbl">Servis alanı</span>
+        </div>
+        <div class="ph ph-2"><span class="lbl">Lastik &amp; balans</span></div>
+        <div class="ph ph-3"><span class="lbl">Motor bölümü</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emergency road assistance strip -->
+<section class="emergency" aria-label="Acil yol yardımı">
+  <div class="wrap">
+    <span class="ico" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+    </span>
+    <div class="txt">
+      <b>Yolda mı kaldınız? Acil yol yardımı hattımız açık.</b>
+      <span>Akü takviyesi, lastik değişimi ve çekici yönlendirmesi için hemen arayın — Antakya ve çevresi.</span>
+    </div>
+    <a class="btn btn-yellow" href="tel:+905305957176">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Acil Ara
+    </a>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="hizmetler" aria-label="Hizmetler">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Hizmetlerimiz</span>
+      <h2>Aracınızın ihtiyacı ne olursa olsun, tek çatı altında.</h2>
+      <p>Binek ve ticari araçlarda tanı, bakım ve onarımın tamamı burada. Her işlemde önce arızayı gösterir, sonra onay alıp başlarız.</p>
+    </div>
+    <div class="svc-grid">
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+        <h3>Periyodik Bakım</h3>
+        <p>Üretici bakım planına uygun tam kontrol: filtreler, kayışlar, sıvı seviyeleri ve genel gözden geçirme.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h1.5l1-2h11l1 2H20a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-1"/><path d="M5 17H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5"/><path d="M12 6V3"/></svg></span>
+        <h3>Motor Onarımı</h3>
+        <p>Cihaz destekli arıza tespiti, ateşleme ve yakıt sistemi, triger/zamanlama ve genel motor revizyonu.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
+        <h3>Fren Sistemleri</h3>
+        <p>Balata ve disk değişimi, fren hidroliği, ABS uyarılarının kontrolü ve güvenli fren testi.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3.5v3.5M12 17v3.5M3.5 12H7M17 12h3.5M6 6l2.4 2.4M15.6 15.6 18 18M18 6l-2.4 2.4M8.4 15.6 6 18"/></svg></span>
+        <h3>Lastik · Balans · Rot</h3>
+        <p>Lastik satış ve montajı, hassas balans, rot-balans ayarı ve mevsimlik lastik değişimi.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M4.9 4.9l4.2 4.2M2 12h6M4.9 19.1l4.2-4.2M12 22v-6M19.1 19.1l-4.2-4.2M22 12h-6M19.1 4.9l-4.2 4.2"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+        <h3>Klima Bakımı</h3>
+        <p>Gaz dolumu, kompresör kontrolü, polen filtresi ve klima hattı hijyeni ile serin bir sürüş.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 7V5h4v2M7 11h3M8.5 9.5v3M15 11h3"/></svg></span>
+        <h3>Akü Servisi</h3>
+        <p>Akü testi, şarj kontrolü, takviye ve yeni akü montajı — marş sorunları için hızlı çözüm.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10M9 21V10a3 3 0 0 1 6 0v11"/><path d="M15 8h2a2 2 0 0 1 2 2v3a1.5 1.5 0 0 0 3 0V8l-2-2"/></svg></span>
+        <h3>Yağ Değişimi</h3>
+        <p>Motor yağı ve filtre değişimi, uygun viskozite seçimi ve sonraki bakım kilometresinin planı.</p>
+      </article>
+
+      <article class="svc">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+        <h3>Genel Ekspertiz</h3>
+        <p>İkinci el alım öncesi detaylı araç kontrolü ve raporlama — kararınızı verilerle verin.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why us -->
+<section class="why" id="neden" aria-label="Neden biz">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Neden Antakya Oto Servis</span>
+      <h2>Söz verdiğimiz gün, söylediğimiz fiyat.</h2>
+      <p>Sürpriz kalem yok, tahmini onarım yok. İşi netleştirir, onayınızla başlar, aracınızı zamanında teslim ederiz.</p>
+    </div>
+    <div class="why-grid">
+      <article class="why-card">
+        <span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div>
+          <h3>İşçilik Garantisi</h3>
+          <p>Yaptığımız her işlemin arkasındayız. Garanti kapsamındaki işlerde ek ücret ödemezsiniz.</p>
+        </div>
+      </article>
+      <article class="why-card">
+        <span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4z"/><path d="M12 3v18M4 7l8 4 8-4"/></svg></span>
+        <div>
+          <h3>Orijinal &amp; Muadil Parça</h3>
+          <p>Bütçenize göre orijinal veya kaliteli muadil seçenek sunar, taktığımız parçayı size gösteririz.</p>
+        </div>
+      </article>
+      <article class="why-card">
+        <span class="n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div>
+          <h3>Hızlı Teslim</h3>
+          <p>Rutin bakım ve çoğu onarım aynı gün hazır. Süreyi baştan söyler, gecikmede haber veririz.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Info: hours + location -->
+<section class="info" id="saatler" aria-label="Çalışma saatleri ve konum">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Bilgi</span>
+      <h2>Çalışma saatleri &amp; konum</h2>
+      <p>Yoğun saatlerde beklememeniz için WhatsApp'tan randevu almanızı öneririz.</p>
+    </div>
+    <div class="info-grid">
+
+      <!-- Hours -->
+      <div class="panel" id="calisma">
+        <div class="panel-head">
+          <span class="pi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <h3>Çalışma Saatleri</h3>
+          <span class="status" id="openStatus"><span class="pulse" aria-hidden="true"></span>Şu an açık</span>
+        </div>
+        <div class="hours">
+          <div class="row" data-day="1"><span class="d">Pazartesi</span><span class="h">08:30 – 19:00</span></div>
+          <div class="row" data-day="2"><span class="d">Salı</span><span class="h">08:30 – 19:00</span></div>
+          <div class="row" data-day="3"><span class="d">Çarşamba</span><span class="h">08:30 – 19:00</span></div>
+          <div class="row" data-day="4"><span class="d">Perşembe</span><span class="h">08:30 – 19:00</span></div>
+          <div class="row" data-day="5"><span class="d">Cuma</span><span class="h">08:30 – 19:00</span></div>
+          <div class="row" data-day="6"><span class="d">Cumartesi</span><span class="h">09:00 – 17:00</span></div>
+          <div class="row closed" data-day="0"><span class="d">Pazar</span><span class="h">Kapalı</span></div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="pi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <h3>Konum</h3>
+        </div>
+        <div class="map" aria-hidden="true">
+          <div class="road-a"></div>
+          <div class="road-b"></div>
+          <div class="pin">
+            <span class="ping"></span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          </div>
+        </div>
+        <div class="addr">
+          <div class="line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><b>Sanayi Sitesi, Antakya / Hatay</b><br>Ana yola cepheli, geniş park alanı</span>
+          </div>
+          <div class="line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><b>0530 595 71 76</b></span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-dark" href="tel:+905305957176">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Hemen Ara
+            </a>
+            <a class="btn btn-wa" href="https://wa.me/905305957176?text=Merhaba%2C%20servise%20yol%20tarifi%20alabilir%20miyim%3F" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+              Yol Tarifi İste
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="contact" id="iletisim" aria-label="İletişim">
+  <div class="wrap">
+    <div class="inner">
+      <span class="eyebrow">İletişim</span>
+      <h2>Aracınız için bugün randevu alın.</h2>
+      <p>Arıza belirtisi, marka-model ve uygun gününüzü yazın; size net bir zaman ve tahmini fiyat aralığı ile dönelim.</p>
+      <div class="cta">
+        <a class="btn btn-wa" href="https://wa.me/905305957176?text=Merhaba%2C%20arac%C4%B1m%20i%C3%A7in%20randevu%20almak%20istiyorum.%20Marka%2Fmodel%3A%20%20%7C%20%C5%9Eik%C3%A2yet%3A%20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.42 1.27 4.86L2 22l5.28-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          WhatsApp'tan Yaz
+        </a>
+        <a class="btn btn-yellow" href="tel:+905305957176">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Hemen Ara
+        </a>
+      </div>
+      <div class="phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        0530 595 71 76
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#f5b21a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          Antakya Oto Servis
+        </div>
+        <p style="margin-top:14px;max-width:34ch">Antakya'da bakım, onarım ve lastik hizmetleri. Aracınız emin ellerde — şeffaf fiyat, garantili işçilik.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Hizmetler</h4>
+        <a href="#hizmetler">Periyodik bakım</a>
+        <a href="#hizmetler">Motor &amp; fren</a>
+        <a href="#hizmetler">Lastik · balans · rot</a>
+        <a href="#hizmetler">Klima · akü · yağ</a>
+      </div>
+      <div class="foot-col">
+        <h4>İletişim</h4>
+        <a href="tel:+905305957176">0530 595 71 76</a>
+        <a href="https://wa.me/905305957176?text=Merhaba%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener">WhatsApp</a>
+        <p>Sanayi Sitesi, Antakya / Hatay</p>
+        <p>Pzt–Cmt açık · Pazar kapalı</p>
+      </div>
+    </div>
+
+    <div class="foot-note">
+      <span class="foot-sample">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        Bu bir <b>örnek çalışmadır</b> — Antakya Oto Servis kurgusal bir işletmedir, gerçek bir müşteri değildir. Hatay Digital tarafından tanıtım amaçlı hazırlanmıştır.
+      </span>
+      <span>© <span id="yil">2026</span> Hatay Digital · Örnek vitrin</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="fab" href="https://wa.me/905305957176?text=Merhaba%2C%20arac%C4%B1m%20i%C3%A7in%20randevu%20ve%20fiyat%20bilgisi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp'tan yazın">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.42 1.27 4.86L2 22l5.28-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+  <span class="label">WhatsApp'tan Randevu</span>
+</a>
+
+<script>
+(function(){
+  "use strict";
+  // Bugünün gününü çalışma saatleri tablosunda vurgula
+  var days = { 1:["08:30","19:00"], 2:["08:30","19:00"], 3:["08:30","19:00"], 4:["08:30","19:00"], 5:["08:30","19:00"], 6:["09:00","17:00"], 0:null };
+  var labels = { 0:"Bugün", 1:"Bugün", 2:"Bugün", 3:"Bugün", 4:"Bugün", 5:"Bugün", 6:"Bugün" };
+  var now = new Date();
+  var dow = now.getDay();
+  var rows = document.querySelectorAll(".hours .row");
+  rows.forEach(function(r){
+    if (parseInt(r.getAttribute("data-day"),10) === dow){
+      r.classList.add("today");
+      var d = r.querySelector(".d");
+      if (d && !r.classList.contains("closed")){
+        var tag = document.createElement("span");
+        tag.className = "today-tag";
+        tag.textContent = "Bugün";
+        d.appendChild(tag);
+      }
+    }
+  });
+
+  // Açık / kapalı durum rozeti
+  var statusEl = document.getElementById("openStatus");
+  if (statusEl){
+    var todayHours = days[dow];
+    var open = false;
+    if (todayHours){
+      var mins = now.getHours()*60 + now.getMinutes();
+      var toMin = function(s){ var p = s.split(":"); return parseInt(p[0],10)*60 + parseInt(p[1],10); };
+      open = mins >= toMin(todayHours[0]) && mins < toMin(todayHours[1]);
+    }
+    if (open){
+      statusEl.innerHTML = '<span class="pulse" aria-hidden="true"></span>Şu an açık';
+    } else {
+      statusEl.style.color = "#b23c3c";
+      statusEl.style.background = "rgba(178,60,60,.1)";
+      statusEl.style.borderColor = "rgba(178,60,60,.28)";
+      statusEl.innerHTML = 'Şu an kapalı';
+    }
+  }
+
+  // Footer yılı
+  var y = document.getElementById("yil");
+  if (y){ y.textContent = String(new Date().getFullYear()); }
+})();
+</script>
+
+</body>
+</html>

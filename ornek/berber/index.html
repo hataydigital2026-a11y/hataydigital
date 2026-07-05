@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171514">
+<title>Efe Berber · Antakya | Erkek Kuaförü & Berber</title>
+<meta name="description" content="Efe Berber — Antakya'da bıçak gibi tıraş, keyifli sohbet. Saç kesimi, sakal tıraşı, cilt bakımı. WhatsApp'tan hızlı randevu.">
+<style>
+  :root{
+    --bg:#171514;
+    --bg-2:#1f1c1a;
+    --panel:#232019;
+    --ink:#f4efe7;
+    --ink-soft:#c9c0b4;
+    --muted:#9a9084;
+    --line:rgba(196,150,84,.16);
+    --line-2:rgba(255,255,255,.06);
+    --copper:#c69749;
+    --copper-2:#e0b96a;
+    --copper-deep:#a97b32;
+    --wood:#2c2620;
+    --danger:#25d366;
+    --radius:18px;
+    --shadow:0 22px 60px -24px rgba(0,0,0,.75);
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+  section{position:relative}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--copper-2);font-weight:700;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--copper))}
+  h2.title{
+    font-size:clamp(1.7rem,4.4vw,2.55rem);
+    line-height:1.12;font-weight:800;letter-spacing:-.01em;
+    margin:14px 0 10px;
+  }
+  .lead{color:var(--ink-soft);max-width:56ch;font-size:1.02rem}
+
+  /* ---------- Sample badge (fixed) ---------- */
+  .sample-badge{
+    position:fixed;top:14px;right:14px;z-index:120;
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 13px;border-radius:999px;
+    background:rgba(23,21,20,.82);
+    border:1px solid var(--line);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;
+    box-shadow:0 10px 30px -14px rgba(0,0,0,.8);
+  }
+  .sample-badge b{color:var(--copper-2);font-weight:800}
+  .sample-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--copper);box-shadow:0 0 0 4px rgba(198,151,73,.16)}
+
+  /* ---------- Floating WhatsApp ---------- */
+  .wa-float{
+    position:fixed;right:16px;bottom:16px;z-index:120;
+    display:inline-flex;align-items:center;gap:9px;
+    padding:13px 18px;border-radius:999px;
+    background:#1fae56;color:#fff;font-weight:700;font-size:.92rem;
+    box-shadow:0 16px 40px -12px rgba(31,174,86,.6);
+    border:1px solid rgba(255,255,255,.14);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .wa-float:hover{transform:translateY(-2px);box-shadow:0 20px 46px -12px rgba(31,174,86,.7)}
+  .wa-float svg{width:20px;height:20px;flex:none}
+  .wa-float span.lbl-full{display:inline}
+  @media(max-width:520px){ .wa-float{padding:13px 15px} .wa-float span.lbl-full{display:none} }
+
+  /* ---------- Header ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(20,18,17,.72);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-2);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em}
+  .brand .mark{
+    width:38px;height:38px;border-radius:11px;flex:none;
+    display:grid;place-items:center;
+    background:
+      radial-gradient(120% 120% at 30% 20%, rgba(224,185,106,.25), transparent 60%),
+      linear-gradient(160deg,#2b241c,#191512);
+    border:1px solid var(--line);
+  }
+  .brand .mark svg{width:21px;height:21px}
+  .brand .txt small{display:block;font-size:.62rem;letter-spacing:.24em;color:var(--copper-2);font-weight:700;text-transform:uppercase}
+  .brand .txt strong{font-size:1.06rem}
+  nav.links{display:none;gap:26px;align-items:center}
+  nav.links a{font-size:.92rem;color:var(--ink-soft);font-weight:500;transition:color .18s}
+  nav.links a:hover{color:var(--ink)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:9px 15px;border-radius:11px;font-weight:700;font-size:.86rem;
+    color:#1a140b;background:linear-gradient(135deg,var(--copper-2),var(--copper));
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 10px 26px -12px rgba(198,151,73,.6);
+  }
+  @media(min-width:880px){ nav.links{display:flex} }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:clamp(46px,8vw,90px) 0 clamp(40px,7vw,72px);
+    background:
+      radial-gradient(80% 120% at 80% -10%, rgba(198,151,73,.13), transparent 55%),
+      radial-gradient(70% 90% at -10% 20%, rgba(120,80,40,.14), transparent 60%),
+      linear-gradient(180deg,var(--bg-2),var(--bg));
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.014) 0 2px, transparent 2px 9px);
+    opacity:.5;
+  }
+  .hero-grid{display:grid;gap:38px;align-items:center;position:relative;z-index:2}
+  @media(min-width:900px){ .hero-grid{grid-template-columns:1.05fr .95fr;gap:48px} }
+  .hero h1{
+    font-size:clamp(2.15rem,6.6vw,4rem);line-height:1.04;font-weight:800;
+    letter-spacing:-.02em;margin:16px 0 16px;
+  }
+  .hero h1 .sub{
+    display:block;font-size:clamp(1rem,2.6vw,1.3rem);font-weight:600;
+    color:var(--copper-2);letter-spacing:.01em;margin-top:12px;
+  }
+  .hero p.lead{font-size:1.08rem;margin-bottom:26px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    padding:15px 22px;border-radius:13px;font-weight:700;font-size:1rem;
+    border:1px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s;
+  }
+  .btn svg{width:20px;height:20px;flex:none}
+  .btn-wa{
+    background:linear-gradient(135deg,#25d366,#1aa851);color:#0c2a16;
+    box-shadow:0 18px 40px -14px rgba(37,211,102,.55);
+    border-color:rgba(255,255,255,.16);
+  }
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 22px 48px -14px rgba(37,211,102,.66)}
+  .btn-ghost{
+    background:rgba(255,255,255,.04);color:var(--ink);
+    border-color:var(--line);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:20px;color:var(--muted);font-size:.9rem}
+  .hero-meta .m{display:flex;align-items:center;gap:8px}
+  .hero-meta svg{width:17px;height:17px;color:var(--copper)}
+
+  /* hero photo block (CSS only) */
+  .photo{
+    position:relative;border-radius:calc(var(--radius) + 4px);overflow:hidden;
+    border:1px solid var(--line);box-shadow:var(--shadow);
+    aspect-ratio:4/5;min-height:340px;
+  }
+  .photo.hero-photo{
+    background:
+      radial-gradient(120% 80% at 70% 15%, rgba(224,185,106,.22), transparent 55%),
+      linear-gradient(160deg,#211c16 0%, #17130f 55%, #0f0c09 100%);
+  }
+  .photo .chair{position:absolute;inset:0;display:grid;place-items:center}
+  .photo .stripe{
+    position:absolute;left:22px;top:22px;bottom:22px;width:14px;border-radius:20px;overflow:hidden;
+    box-shadow:0 8px 24px -8px rgba(0,0,0,.6);
+    background:repeating-linear-gradient(180deg,#e7e2d8 0 12px,#c1352f 12px 24px,#e7e2d8 24px 36px,#1f6fb2 36px 48px);
+    animation:pole 5s linear infinite;
+  }
+  @keyframes pole{to{background-position:0 48px}}
+  .photo .glow{
+    position:absolute;right:-40px;bottom:-40px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(198,151,73,.35),transparent 65%);filter:blur(6px);
+  }
+  .photo .emblem{
+    width:150px;height:150px;border-radius:50%;
+    display:grid;place-items:center;
+    border:2px solid rgba(224,185,106,.5);
+    background:radial-gradient(circle at 40% 30%, rgba(224,185,106,.14), transparent 60%);
+    box-shadow:inset 0 0 40px rgba(0,0,0,.4);
+  }
+  .photo .emblem svg{width:74px;height:74px;color:var(--copper-2)}
+  .photo .badge-open{
+    position:absolute;left:22px;bottom:22px;z-index:3;
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(15,13,11,.7);border:1px solid var(--line);
+    padding:8px 13px;border-radius:999px;font-size:.78rem;color:var(--ink-soft);font-weight:600;
+    backdrop-filter:blur(6px);
+  }
+  .badge-open .live{width:8px;height:8px;border-radius:50%;background:#37d67a;box-shadow:0 0 0 4px rgba(55,214,122,.18)}
+
+  /* ---------- Stats strip ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--radius);overflow:hidden;
+    margin-top:44px;
+  }
+  @media(min-width:640px){ .stats{grid-template-columns:repeat(4,1fr)} }
+  .stat{background:var(--bg-2);padding:22px 18px;text-align:center}
+  .stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--copper-2);letter-spacing:-.02em}
+  .stat span{font-size:.82rem;color:var(--muted)}
+
+  /* ---------- Section shell ---------- */
+  .sec{padding:clamp(52px,8vw,88px) 0}
+  .sec-head{max-width:640px;margin-bottom:36px}
+
+  /* ---------- Services / prices ---------- */
+  .svc-grid{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:600px){ .svc-grid{grid-template-columns:1fr 1fr} }
+  @media(min-width:920px){ .svc-grid{grid-template-columns:1fr 1fr 1fr} }
+  .svc{
+    background:linear-gradient(180deg,var(--panel),#1c1815);
+    border:1px solid var(--line-2);border-radius:var(--radius);
+    padding:22px 22px 20px;position:relative;overflow:hidden;
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+  }
+  .svc:hover{transform:translateY(-4px);border-color:var(--line);box-shadow:var(--shadow)}
+  .svc .ico{
+    width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;
+    background:radial-gradient(120% 120% at 30% 20%, rgba(224,185,106,.22), transparent 60%),#221d16;
+    border:1px solid var(--line);
+  }
+  .svc .ico svg{width:24px;height:24px;color:var(--copper-2)}
+  .svc h3{font-size:1.12rem;font-weight:700;margin-bottom:6px}
+  .svc p{font-size:.9rem;color:var(--muted);margin-bottom:16px;min-height:38px}
+  .svc .price-row{
+    display:flex;align-items:baseline;justify-content:space-between;
+    padding-top:14px;border-top:1px solid var(--line-2);
+  }
+  .svc .price{font-size:1.35rem;font-weight:800;color:var(--ink)}
+  .svc .price small{font-size:.78rem;color:var(--muted);font-weight:600}
+  .svc .tag{
+    position:absolute;top:16px;right:16px;
+    font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    color:var(--copper-2);background:rgba(198,151,73,.12);border:1px solid var(--line);
+    padding:4px 9px;border-radius:999px;
+  }
+  .price-note{margin-top:18px;font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .price-note svg{width:16px;height:16px;color:var(--copper);flex:none}
+
+  /* ---------- Why us ---------- */
+  .why{background:linear-gradient(180deg,var(--bg),#141110)}
+  .why-grid{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:720px){ .why-grid{grid-template-columns:1fr 1fr} }
+  .why-card{
+    display:flex;gap:16px;align-items:flex-start;
+    background:rgba(255,255,255,.02);border:1px solid var(--line-2);
+    border-radius:var(--radius);padding:22px;
+    transition:border-color .2s,transform .2s;
+  }
+  .why-card:hover{border-color:var(--line);transform:translateY(-3px)}
+  .why-card .n{
+    width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center;
+    background:radial-gradient(120% 120% at 30% 20%, rgba(224,185,106,.24), transparent 60%),#201b14;
+    border:1px solid var(--line);
+  }
+  .why-card .n svg{width:22px;height:22px;color:var(--copper-2)}
+  .why-card h3{font-size:1.05rem;margin-bottom:4px}
+  .why-card p{font-size:.9rem;color:var(--muted)}
+
+  /* ---------- Hours ---------- */
+  .split{display:grid;gap:28px;grid-template-columns:1fr}
+  @media(min-width:860px){ .split{grid-template-columns:1fr 1fr;gap:36px} }
+  .card-block{
+    background:linear-gradient(180deg,var(--panel),#1b1713);
+    border:1px solid var(--line-2);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);
+  }
+  .hours-list{list-style:none;margin-top:8px}
+  .hours-list li{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:13px 0;border-bottom:1px solid var(--line-2);font-size:.96rem;
+  }
+  .hours-list li:last-child{border-bottom:0}
+  .hours-list li.today{color:var(--copper-2);font-weight:700}
+  .hours-list li .day{color:var(--ink-soft)}
+  .hours-list li.today .day{color:var(--copper-2)}
+  .hours-list li .h{font-variant-numeric:tabular-nums;color:var(--muted)}
+  .hours-list li.today .h{color:var(--copper-2)}
+  .hours-list .closed{color:#d98a6a}
+  .hours-note{
+    margin-top:18px;display:flex;align-items:center;gap:10px;
+    background:rgba(198,151,73,.08);border:1px solid var(--line);
+    border-radius:12px;padding:13px 15px;font-size:.88rem;color:var(--ink-soft);
+  }
+  .hours-note svg{width:20px;height:20px;color:var(--copper-2);flex:none}
+
+  /* ---------- Map (CSS representation) ---------- */
+  .map{
+    position:relative;border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line-2);min-height:300px;height:100%;
+    background:
+      linear-gradient(180deg,#1a1c1e,#141517);
+  }
+  .map .grid-lines{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:38px 38px;
+  }
+  .map .road{position:absolute;background:rgba(198,151,73,.14)}
+  .map .road.r1{left:0;right:0;top:52%;height:14px;transform:rotate(-4deg)}
+  .map .road.r2{top:0;bottom:0;left:38%;width:10px}
+  .map .road.r3{left:0;right:0;top:24%;height:7px;transform:rotate(3deg);background:rgba(255,255,255,.05)}
+  .map .river{position:absolute;left:-10%;right:-10%;bottom:12%;height:26px;transform:rotate(-6deg);
+    background:linear-gradient(90deg,rgba(70,120,150,.28),rgba(70,120,150,.14));border-radius:40px;filter:blur(.4px)}
+  .map .pin{
+    position:absolute;left:38%;top:52%;transform:translate(-50%,-100%);z-index:3;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .map .pin .drop{
+    width:40px;height:40px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+    background:linear-gradient(135deg,var(--copper-2),var(--copper-deep));
+    border:2px solid rgba(255,255,255,.5);box-shadow:0 12px 26px -8px rgba(0,0,0,.7);
+    display:grid;place-items:center;
+  }
+  .map .pin .drop svg{width:18px;height:18px;transform:rotate(45deg);color:#1a140b}
+  .map .pin::after{content:"";width:20px;height:6px;border-radius:50%;background:rgba(0,0,0,.4);margin-top:6px;filter:blur(2px)}
+  .map .maplabel{
+    position:absolute;left:16px;bottom:16px;z-index:4;
+    background:rgba(15,13,11,.78);border:1px solid var(--line);backdrop-filter:blur(6px);
+    padding:11px 15px;border-radius:12px;
+  }
+  .map .maplabel b{display:block;font-size:.95rem}
+  .map .maplabel span{font-size:.8rem;color:var(--muted)}
+  .map .zoom{
+    position:absolute;right:14px;top:14px;z-index:4;display:flex;flex-direction:column;
+    border-radius:10px;overflow:hidden;border:1px solid var(--line-2);
+  }
+  .map .zoom button{
+    width:34px;height:34px;background:rgba(15,13,11,.8);color:var(--ink-soft);
+    border:0;border-bottom:1px solid var(--line-2);font-size:1.1rem;cursor:default;
+  }
+  .map .zoom button:last-child{border-bottom:0}
+
+  .contact-lines{list-style:none;margin-top:8px}
+  .contact-lines li{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-2)}
+  .contact-lines li:last-child{border-bottom:0}
+  .contact-lines .ic{
+    width:42px;height:42px;flex:none;border-radius:11px;display:grid;place-items:center;
+    background:#201b14;border:1px solid var(--line);
+  }
+  .contact-lines .ic svg{width:20px;height:20px;color:var(--copper-2)}
+  .contact-lines .lab{font-size:.75rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .contact-lines .val{font-size:1rem;font-weight:600;color:var(--ink)}
+  .contact-lines a.val:hover{color:var(--copper-2)}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    margin-top:6px;
+    background:
+      radial-gradient(80% 140% at 20% 0%, rgba(198,151,73,.18), transparent 55%),
+      linear-gradient(135deg,#241d13,#191411);
+    border:1px solid var(--line);border-radius:calc(var(--radius) + 6px);
+    padding:clamp(30px,5vw,52px);text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .cta-band::before{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0 2px,transparent 2px 10px);
+  }
+  .cta-band > *{position:relative;z-index:2}
+  .cta-band h2{font-size:clamp(1.6rem,4.6vw,2.4rem);font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+  .cta-band p{color:var(--ink-soft);max-width:52ch;margin:0 auto 26px}
+  .cta-band .btn{margin:0 auto}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line-2);background:#110e0c;margin-top:clamp(52px,8vw,88px)}
+  .foot-in{display:grid;gap:28px;grid-template-columns:1fr;padding:44px 0 24px}
+  @media(min-width:760px){ .foot-in{grid-template-columns:1.4fr 1fr 1fr} }
+  .foot-brand{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+  .foot-brand .mark{
+    width:40px;height:40px;border-radius:11px;flex:none;display:grid;place-items:center;
+    background:linear-gradient(160deg,#2b241c,#191512);border:1px solid var(--line);
+  }
+  .foot-brand .mark svg{width:22px;height:22px;color:var(--copper-2)}
+  .foot-brand strong{font-size:1.1rem}
+  .foot-col h4{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-2);margin-bottom:14px;font-weight:700}
+  .foot-col a,.foot-col p{display:block;color:var(--ink-soft);font-size:.92rem;margin-bottom:9px}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-desc{color:var(--muted);font-size:.9rem;max-width:36ch}
+  .foot-bottom{
+    border-top:1px solid var(--line-2);padding:20px 0 34px;
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+    font-size:.82rem;color:var(--muted);
+  }
+  .foot-sample{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(198,151,73,.08);border:1px solid var(--line);
+    padding:7px 13px;border-radius:999px;color:var(--ink-soft);font-weight:600;
+  }
+  .foot-sample b{color:var(--copper-2)}
+  .foot-sample svg{width:15px;height:15px;color:var(--copper-2)}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .photo .stripe{animation:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- Sabit örnek çalışma rozeti -->
+<div class="sample-badge" role="note" aria-label="Örnek çalışma">
+  <span class="dot" aria-hidden="true"></span>
+  ÖRNEK ÇALIŞMA · <b>Hatay Digital</b>
+</div>
+
+<!-- Sabit WhatsApp butonu -->
+<a class="wa-float"
+   href="https://wa.me/905305957176?text=Merhaba%20Efe%20Berber%2C%20randevu%20almak%20istiyorum."
+   aria-label="WhatsApp'tan randevu al">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.25-8.25 8.25zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.48-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+  <span class="lbl-full">WhatsApp'tan Randevu</span>
+</a>
+
+<!-- Header -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Efe Berber ana sayfa">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--copper-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l6 6M6 18l6-6"/><circle cx="4.5" cy="4.5" r="2.5"/><circle cx="4.5" cy="19.5" r="2.5"/><path d="M12 12l8-6M12 12l8 6"/></svg>
+      </span>
+      <span class="txt">
+        <small>Antakya · Berber</small>
+        <strong>Efe Berber</strong>
+      </span>
+    </a>
+    <nav class="links" aria-label="Ana menü">
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#neden">Neden Biz</a>
+      <a href="#saatler">Saatler</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/905305957176?text=Merhaba%20Efe%20Berber%2C%20randevu%20almak%20istiyorum.">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm4.52 11.86c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.48-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+      Randevu
+    </a>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Antakya'nın maskülen köşesi</span>
+      <h1>
+        Efe Berber
+        <span class="sub">Bıçak gibi tıraş, keyifli sohbet.</span>
+      </h1>
+      <p class="lead">Klasik ustalık ile modern çizgiyi buluşturuyoruz. Sıra beklemeden, dakikası dakikasına randevu — koltuğa oturduğunuz an fark yaratsın.</p>
+      <div class="hero-cta">
+        <a class="btn btn-wa"
+           href="https://wa.me/905305957176?text=Merhaba%20Efe%20Berber%2C%20sa%C3%A7%20ve%20sakal%20i%C3%A7in%20randevu%20almak%20istiyorum.%20M%C3%BCsait%20saatleriniz%20nedir%3F">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm4.52 11.86c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.48-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          WhatsApp'tan Randevu
+        </a>
+        <a class="btn btn-ghost" href="tel:+905305957176">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+          Hemen Ara
+        </a>
+      </div>
+      <div class="hero-meta">
+        <span class="m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Antakya, Hatay</span>
+        <span class="m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 09:00 – 21:00</span>
+        <span class="m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Randevulu çalışırız</span>
+      </div>
+    </div>
+
+    <div class="photo hero-photo" aria-hidden="true">
+      <div class="stripe"></div>
+      <div class="glow"></div>
+      <div class="chair">
+        <div class="emblem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l6 6M6 18l6-6"/><circle cx="4.5" cy="4.5" r="2.5"/><circle cx="4.5" cy="19.5" r="2.5"/><path d="M12 12l8-6M12 12l8 6"/></svg>
+        </div>
+      </div>
+      <div class="badge-open"><span class="live"></span> Şu an açık · randevuya uygun</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><b>12+</b><span>yıllık ustalık</span></div>
+      <div class="stat"><b>%100</b><span>tek kullanımlık jilet</span></div>
+      <div class="stat"><b>15 dk</b><span>ortalama bekleme yok</span></div>
+      <div class="stat"><b>7/gün</b><span>haftanın her günü</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Hizmetler & Fiyatlar -->
+<section class="sec" id="hizmetler">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Hizmetler & Fiyatlar</span>
+      <h2 class="title">Her tıraşta aynı özen, net fiyat</h2>
+      <p class="lead">Fiyatlarımız şeffaf. İşleminizi WhatsApp'tan seçin, size en uygun saati birlikte ayarlayalım.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <span class="tag">En çok tercih</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l6 6M6 18l6-6"/><circle cx="4.5" cy="4.5" r="2.5"/><circle cx="4.5" cy="19.5" r="2.5"/><path d="M12 12l8-6M12 12l8 6"/></svg></div>
+        <h3>Saç Kesimi</h3>
+        <p>Makas & makine, yıkama ve şekillendirme dahil. Yüz hatlarınıza uygun kesim.</p>
+        <div class="price-row"><span class="price">250<small> ₺</small></span><span class="price"><small>~30 dk</small></span></div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4c4 2 6 6 6 10M20 4c-4 2-6 6-6 10M8 20h8"/><path d="M12 14v6"/></svg></div>
+        <h3>Sakal Tıraşı</h3>
+        <p>Sıcak havlu, ustura hassasiyeti ve bakım yağı ile pürüzsüz, keskin sakal.</p>
+        <div class="price-row"><span class="price">150<small> ₺</small></span><span class="price"><small>~20 dk</small></span></div>
+      </article>
+
+      <article class="svc reveal">
+        <span class="tag">Kombine</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l1.6 3.2 3.4.5-2.5 2.4.6 3.4-3.1-1.6-3.1 1.6.6-3.4-2.5-2.4 3.4-.5z"/></svg></div>
+        <h3>Saç + Sakal</h3>
+        <p>Kesim ve sakal tıraşı bir arada — en avantajlı paket, komple bakım.</p>
+        <div class="price-row"><span class="price">350<small> ₺</small></span><span class="price"><small>~45 dk</small></span></div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4"/><path d="M12 13c-3 0-6 1.8-6 5v1h12v-1c0-3.2-3-5-6-5z"/><path d="M9 8h.01M15 8h.01"/></svg></div>
+        <h3>Cilt Bakımı & Maske</h3>
+        <p>Yüz temizliği, siyah nokta arındırma ve nemlendirici maske ile canlı bir cilt.</p>
+        <div class="price-row"><span class="price">200<small> ₺</small></span><span class="price"><small>~25 dk</small></span></div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1c0-2.8 2.7-4 6-4s6 1.2 6 4v1"/><path d="M17 7l2 2 3-3"/></svg></div>
+        <h3>Çocuk Tıraşı</h3>
+        <p>Minik müşterilerimize sabırlı, güvenli ve keyifli bir tıraş deneyimi.</p>
+        <div class="price-row"><span class="price">150<small> ₺</small></span><span class="price"><small>~25 dk</small></span></div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12c0-3.9 3.1-7 7-7s7 3.1 7 7"/><path d="M4 12h16M8 16l1.5 2M16 16l-1.5 2M12 16v3"/></svg></div>
+        <h3>Ağda & Detay</h3>
+        <p>Kaş, kulak ve burun bölgesi hassas ağda ile temiz, bakımlı bir görünüm.</p>
+        <div class="price-row"><span class="price">100<small> ₺</small></span><span class="price"><small>~15 dk</small></span></div>
+      </article>
+    </div>
+
+    <p class="price-note reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+      Fiyatlar örnek çalışma amaçlıdır ve temsilîdir. Güncel liste için WhatsApp'tan yazabilirsiniz.
+    </p>
+  </div>
+</section>
+
+<!-- Neden Biz -->
+<section class="sec why" id="neden">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Neden Efe Berber?</span>
+      <h2 class="title">Koltuğa güvenle oturun</h2>
+      <p class="lead">İyi bir tıraş, ustalık kadar hijyen ve zamanınıza saygıyla başlar.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div><h3>Kusursuz hijyen</h3><p>Her müşteriye tek kullanımlık jilet, dezenfekte edilmiş ekipman ve titiz temizlik standardı.</p></div>
+      </div>
+      <div class="why-card reveal">
+        <div class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.5L21 9l-5 4.2L17.5 20 12 16.4 6.5 20 8 13.2 3 9l6.6-.5z"/></svg></div>
+        <div><h3>12+ yıl deneyim</h3><p>Klasik ustura tekniğinden modern fade kesimlere — usta ellerde, isteğinize göre şekil.</p></div>
+      </div>
+      <div class="why-card reveal">
+        <div class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18M9 14l2 2 4-4"/></svg></div>
+        <div><h3>Randevu sistemi</h3><p>WhatsApp'tan dakikada randevu alın; sıra beklemeden, size ayrılmış saatte koltuğa oturun.</p></div>
+      </div>
+      <div class="why-card reveal">
+        <div class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.7-4.3-9-9C1.5 8.6 3.4 5 7 5c2 0 3.3 1.2 5 3 1.7-1.8 3-3 5-3 3.6 0 5.5 3.6 4 7-2.3 4.7-9 9-9 9z"/></svg></div>
+        <div><h3>Keyifli ortam</h3><p>Sıcak bir sohbet, çayınız hazır — Antakya usulü misafirperverlikle bakımlı çıkın.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Saatler & Konum -->
+<section class="sec" id="saatler">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Çalışma Saatleri & Konum</span>
+      <h2 class="title">Buradayız, kapımız açık</h2>
+    </div>
+
+    <div class="split">
+      <div class="card-block reveal">
+        <span class="eyebrow">Haftalık program</span>
+        <ul class="hours-list" id="hoursList">
+          <li data-day="1"><span class="day">Pazartesi</span><span class="h">09:00 – 21:00</span></li>
+          <li data-day="2"><span class="day">Salı</span><span class="h">09:00 – 21:00</span></li>
+          <li data-day="3"><span class="day">Çarşamba</span><span class="h">09:00 – 21:00</span></li>
+          <li data-day="4"><span class="day">Perşembe</span><span class="h">09:00 – 21:00</span></li>
+          <li data-day="5"><span class="day">Cuma</span><span class="h">09:00 – 21:30</span></li>
+          <li data-day="6"><span class="day">Cumartesi</span><span class="h">09:00 – 21:30</span></li>
+          <li data-day="0"><span class="day">Pazar</span><span class="h">10:00 – 18:00</span></li>
+        </ul>
+        <div class="hours-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Yoğun saatlerde randevu önceliklidir. WhatsApp'tan saatinizi ayırtın.
+        </div>
+      </div>
+
+      <div class="map reveal" role="img" aria-label="Efe Berber temsilî konum haritası — Antakya merkez">
+        <div class="grid-lines"></div>
+        <div class="river"></div>
+        <div class="road r3"></div>
+        <div class="road r1"></div>
+        <div class="road r2"></div>
+        <div class="pin">
+          <div class="drop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l6 6M6 18l6-6"/><circle cx="4.5" cy="4.5" r="2"/><circle cx="4.5" cy="19.5" r="2"/></svg></div>
+        </div>
+        <div class="zoom" aria-hidden="true"><button type="button" tabindex="-1">+</button><button type="button" tabindex="-1">−</button></div>
+        <div class="maplabel">
+          <b>Efe Berber</b>
+          <span>Kurtuluş Cad., Antakya · Hatay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- İletişim -->
+<section class="sec" id="iletisim" style="padding-top:0">
+  <div class="wrap">
+    <div class="split">
+      <div class="card-block reveal">
+        <span class="eyebrow">Bize ulaşın</span>
+        <h2 class="title" style="font-size:clamp(1.4rem,3.6vw,1.9rem)">İletişim</h2>
+        <ul class="contact-lines">
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm4.52 11.86c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.48-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg></span>
+            <div><span class="lab">WhatsApp</span><a class="val" href="https://wa.me/905305957176?text=Merhaba%20Efe%20Berber%2C%20randevu%20almak%20istiyorum.">Randevu için yazın</a></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg></span>
+            <div><span class="lab">Telefon</span><a class="val" href="tel:+905305957176">0530 595 71 76</a></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><span class="lab">Adres</span><span class="val">Kurtuluş Caddesi, Antakya / Hatay</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div><span class="lab">Saatler</span><span class="val">Her gün 09:00 – 21:00</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-block reveal cta-band" style="display:flex;flex-direction:column;justify-content:center;text-align:center">
+        <span class="eyebrow" style="justify-content:center;margin-bottom:8px">Hazırsanız</span>
+        <h2>Sıradaki koltuk sizin</h2>
+        <p>Bir mesaj yeter. Size en uygun saati birlikte belirleyelim, siz sadece gelin ve keyfini çıkarın.</p>
+        <a class="btn btn-wa"
+           href="https://wa.me/905305957176?text=Merhaba%20Efe%20Berber%2C%20randevu%20almak%20istiyorum.%20Bug%C3%BCn%20m%C3%BCsait%20bir%20saatiniz%20var%20m%C4%B1%3F">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm4.52 11.86c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.48-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          WhatsApp'tan Randevu Al
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <div class="foot-brand">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l6 6M6 18l6-6"/><circle cx="4.5" cy="4.5" r="2.5"/><circle cx="4.5" cy="19.5" r="2.5"/><path d="M12 12l8-6M12 12l8 6"/></svg></span>
+        <strong>Efe Berber</strong>
+      </div>
+      <p class="foot-desc">Antakya'da erkek bakımının adresi. Bıçak gibi tıraş, keyifli sohbet — randevunuzu bir mesaj uzağınızda.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Menü</h4>
+      <a href="#hizmetler">Hizmetler & Fiyatlar</a>
+      <a href="#neden">Neden Biz</a>
+      <a href="#saatler">Çalışma Saatleri</a>
+      <a href="#iletisim">İletişim</a>
+    </div>
+    <div class="foot-col">
+      <h4>İletişim</h4>
+      <a href="https://wa.me/905305957176?text=Merhaba%20Efe%20Berber%2C%20randevu%20almak%20istiyorum.">WhatsApp ile randevu</a>
+      <a href="tel:+905305957176">0530 595 71 76</a>
+      <p>Kurtuluş Cad., Antakya / Hatay</p>
+      <p>Her gün 09:00 – 21:00</p>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span class="foot-sample">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z"/></svg>
+      Bu bir <b>örnek çalışmadır</b> — kurgusal bir işletmedir, gerçek müşteri değildir.
+    </span>
+    <span>Tasarım &amp; yapım: <b style="color:var(--copper-2)">Hatay Digital</b></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // Bugünün çalışma saatini vurgula
+  try{
+    var today = new Date().getDay(); // 0=Pazar
+    var items = document.querySelectorAll('#hoursList li');
+    items.forEach(function(li){
+      if(parseInt(li.getAttribute('data-day'),10) === today){
+        li.classList.add('today');
+      }
+    });
+  }catch(e){}
+
+  // Görünüme girince yumuşak reveal
+  try{
+    var els = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      },{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+      els.forEach(function(el){ io.observe(el); });
+    }else{
+      els.forEach(function(el){ el.classList.add('in'); });
+    }
+  }catch(e){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>

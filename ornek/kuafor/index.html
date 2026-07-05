@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nur Güzellik &amp; Kuaför — Antakya Kadın Kuaförü &amp; Güzellik Salonu</title>
+<meta name="description" content="Nur Güzellik &amp; Kuaför — Antakya'da saç kesim, boya, bakım, keratin, ağda, kaş-kirpik, manikür-pedikür ve gelin paketleri. WhatsApp'tan randevu alın." />
+<style>
+  :root{
+    --blush:#F7EDE8;
+    --card:#FBF7F4;
+    --rose:#B76E79;
+    --rose-deep:#9C5460;
+    --bordo:#7A2E3A;
+    --bordo-dark:#5E2029;
+    --gold:#C9A96A;
+    --gold-soft:#E4D3AE;
+    --ink:#4A3439;
+    --ink-soft:#7A6167;
+    --line:#E7D6CE;
+    --wa:#25623b;
+    --wa-bright:#2f7d4b;
+    --shadow:24px 30px 60px -34px rgba(122,46,58,.45);
+    --shadow-sm:10px 14px 30px -20px rgba(122,46,58,.4);
+    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--blush);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+  p{margin:0}
+  a{color:inherit}
+  img{max-width:100%}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-family:var(--sans);
+    text-transform:uppercase;
+    letter-spacing:.28em;
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--rose);
+    display:inline-flex;
+    align-items:center;
+    gap:.6em;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+
+  /* ---------- örnek çalışma rozeti ---------- */
+  .demo-badge{
+    position:fixed;
+    top:14px;
+    right:14px;
+    z-index:120;
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    background:rgba(94,32,41,.92);
+    color:#F7EDE8;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:.68rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-weight:700;
+    box-shadow:0 8px 22px -10px rgba(94,32,41,.8);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(228,211,174,.45);
+    text-decoration:none;
+  }
+  .demo-badge svg{width:15px;height:15px;flex:none}
+  .demo-badge b{color:var(--gold-soft);font-weight:700}
+  @media(max-width:520px){
+    .demo-badge{font-size:.6rem;padding:6px 11px;top:10px;right:10px}
+    .demo-badge svg{width:13px;height:13px}
+  }
+
+  /* ---------- sabit whatsapp ---------- */
+  .wa-fab{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:115;
+    display:inline-flex;
+    align-items:center;
+    gap:.6em;
+    background:var(--wa);
+    color:#fff;
+    text-decoration:none;
+    padding:13px 20px 13px 16px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:.95rem;
+    box-shadow:0 14px 30px -12px rgba(37,98,59,.7);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .wa-fab:hover{transform:translateY(-2px);background:var(--wa-bright)}
+  .wa-fab svg{width:22px;height:22px;flex:none}
+  .wa-fab .lbl-long{display:inline}
+  @media(max-width:520px){
+    .wa-fab{padding:12px;border-radius:50%;gap:0}
+    .wa-fab .lbl-long{display:none}
+    .wa-fab svg{width:26px;height:26px}
+  }
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:100;
+    background:rgba(247,237,232,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand-mark{
+    width:42px;height:42px;border-radius:50%;flex:none;
+    background:
+      radial-gradient(circle at 34% 30%, #EBD3C6 0%, transparent 55%),
+      linear-gradient(135deg,var(--rose) 0%, var(--bordo) 100%);
+    display:grid;place-items:center;
+    color:#fff;font-family:var(--serif);font-size:1.2rem;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.35), var(--shadow-sm);
+  }
+  .brand-txt{display:flex;flex-direction:column;line-height:1.1}
+  .brand-txt strong{font-family:var(--serif);font-size:1.18rem;color:var(--bordo);font-weight:400;letter-spacing:.01em}
+  .brand-txt span{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rose)}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{text-decoration:none;font-size:.92rem;font-weight:600;color:var(--ink);opacity:.82;transition:opacity .15s,color .15s}
+  .nav-links a:hover{opacity:1;color:var(--bordo)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:.5em;
+    background:var(--bordo);color:#fff;text-decoration:none;
+    padding:9px 17px;border-radius:999px;font-size:.86rem;font-weight:700;
+    transition:background .2s;
+  }
+  .nav-cta:hover{background:var(--bordo-dark)}
+  .nav-cta svg{width:15px;height:15px}
+  @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
+  /* Geniş ekranda sağ üst köşeyi sabit "ÖRNEK ÇALIŞMA" rozeti kullanır; header'daki Randevu
+     butonu orada çakışırdı. Randevu CTA'sı zaten sabit WhatsApp butonu + hero ile fazlasıyla
+     mevcut, bu yüzden header CTA'sını yalnızca dar-orta ekranda (rozetin küçüldüğü yerde) göster. */
+  @media(min-width:861px){.nav-cta{display:none}}
+  @media(max-width:520px){.nav-cta{display:none}}
+  /* Geniş ekranda nav linkleri rozetin altına girmesin diye sağda yer aç. */
+  @media(min-width:861px){.nav-links{padding-right:275px}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:64px 0 78px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background:
+      radial-gradient(60% 55% at 82% 8%, rgba(201,169,106,.24) 0%, transparent 60%),
+      radial-gradient(70% 60% at 8% 92%, rgba(183,110,121,.20) 0%, transparent 62%),
+      var(--blush);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+  .hero-copy h1{font-size:clamp(2.5rem,6vw,4.15rem);color:var(--bordo);margin:.35em 0 .28em;letter-spacing:.005em}
+  .hero-copy h1 em{font-style:italic;color:var(--rose)}
+  .hero-lead{font-size:1.12rem;color:var(--ink-soft);max-width:34ch;margin-bottom:30px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn-wa-hero{
+    display:inline-flex;align-items:center;gap:.65em;
+    background:var(--wa);color:#fff;text-decoration:none;
+    padding:16px 26px;border-radius:999px;font-weight:700;font-size:1.02rem;
+    box-shadow:0 16px 34px -14px rgba(37,98,59,.65);
+    transition:transform .2s,background .2s;
+  }
+  .btn-wa-hero:hover{transform:translateY(-2px);background:var(--wa-bright)}
+  .btn-wa-hero svg{width:23px;height:23px}
+  .btn-call{
+    display:inline-flex;align-items:center;gap:.55em;
+    border:1.5px solid var(--rose);color:var(--bordo);text-decoration:none;
+    padding:15px 24px;border-radius:999px;font-weight:700;font-size:1.02rem;
+    background:rgba(255,255,255,.4);
+    transition:background .2s,border-color .2s;
+  }
+  .btn-call:hover{background:#fff;border-color:var(--bordo)}
+  .btn-call svg{width:18px;height:18px}
+  .hero-trust{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}
+  .hero-trust div{display:flex;flex-direction:column}
+  .hero-trust strong{font-family:var(--serif);font-size:1.55rem;color:var(--bordo)}
+  .hero-trust span{font-size:.78rem;color:var(--ink-soft);letter-spacing:.04em}
+
+  /* hero fotoğraf alanı (CSS) */
+  .hero-photo{
+    position:relative;aspect-ratio:4/5;border-radius:26px;overflow:hidden;
+    box-shadow:var(--shadow);
+    background:
+      radial-gradient(120% 90% at 20% 12%, rgba(255,255,255,.55) 0%, transparent 45%),
+      linear-gradient(160deg,#D8A7AC 0%, var(--rose) 42%, var(--bordo) 100%);
+  }
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.06) 0 2px, transparent 2px 22px);
+    mix-blend-mode:soft-light;
+  }
+  .hero-photo .glass{
+    position:absolute;left:18px;right:18px;bottom:18px;
+    background:rgba(251,247,244,.9);
+    backdrop-filter:blur(6px);
+    border-radius:16px;padding:16px 18px;
+    display:flex;align-items:center;gap:14px;
+    box-shadow:var(--shadow-sm);
+  }
+  .hero-photo .glass .ic{
+    width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--gold),#B78F4E);color:#fff;
+  }
+  .hero-photo .glass .ic svg{width:20px;height:20px}
+  .hero-photo .glass strong{display:block;font-family:var(--serif);color:var(--bordo);font-size:1.02rem}
+  .hero-photo .glass span{font-size:.8rem;color:var(--ink-soft)}
+  .hero-photo .float-tag{
+    position:absolute;top:18px;left:18px;
+    background:rgba(94,32,41,.85);color:#F7EDE8;
+    padding:7px 14px;border-radius:999px;font-size:.72rem;
+    letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    display:flex;align-items:center;gap:.4em;
+  }
+  .hero-photo .float-tag svg{width:13px;height:13px}
+
+  @media(max-width:840px){
+    .hero-grid{grid-template-columns:1fr;gap:38px}
+    .hero-photo{max-width:420px;margin:0 auto;aspect-ratio:5/5}
+    .hero-lead{max-width:none}
+  }
+
+  /* ---------- section shells ---------- */
+  section{padding:70px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 44px}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,2.7rem);color:var(--bordo);margin:.4em 0 .3em}
+  .sec-head p{color:var(--ink-soft);font-size:1.05rem}
+
+  /* ---------- hizmetler ---------- */
+  .services{background:linear-gradient(180deg,var(--blush) 0%, #F2E2DA 100%)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc-card{
+    background:var(--card);border-radius:20px;padding:26px 24px;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow-sm);
+    display:flex;flex-direction:column;gap:12px;
+    transition:transform .22s ease, box-shadow .22s ease;
+    position:relative;overflow:hidden;
+  }
+  .svc-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--rose),var(--gold));
+    transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
+  }
+  .svc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .svc-card:hover::before{transform:scaleX(1)}
+  .svc-ic{
+    width:52px;height:52px;border-radius:15px;display:grid;place-items:center;flex:none;
+    background:linear-gradient(135deg,#F3E1DA,#E7CBC2);
+    color:var(--bordo);
+    box-shadow:inset 0 0 0 1px rgba(183,110,121,.25);
+  }
+  .svc-ic svg{width:26px;height:26px}
+  .svc-card h3{font-size:1.28rem;color:var(--bordo)}
+  .svc-card p{font-size:.92rem;color:var(--ink-soft);flex:1}
+  .svc-price{
+    align-self:flex-start;
+    display:inline-flex;align-items:baseline;gap:.35em;
+    background:linear-gradient(135deg,#FBF3E4,#F3E6C9);
+    color:var(--bordo-dark);
+    padding:6px 14px;border-radius:999px;
+    font-weight:700;font-size:.92rem;
+    border:1px solid var(--gold-soft);
+    font-variant-numeric:tabular-nums;
+  }
+  .svc-price small{font-weight:600;font-size:.72rem;color:var(--ink-soft);letter-spacing:.05em}
+  @media(max-width:820px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:540px){.svc-grid{grid-template-columns:1fr}}
+
+  /* ---------- stil galerisi (önce/sonra hissi) ---------- */
+  .gallery-sec{background:var(--blush)}
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .gal-card{
+    aspect-ratio:3/4;border-radius:18px;overflow:hidden;position:relative;
+    box-shadow:var(--shadow-sm);cursor:default;
+  }
+  .gal-card .lbl{
+    position:absolute;left:12px;bottom:12px;right:12px;
+    color:#fff;font-family:var(--serif);font-size:1.05rem;
+    text-shadow:0 2px 10px rgba(0,0,0,.4);
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+  }
+  .gal-card .lbl span{
+    font-family:var(--sans);font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;
+    background:rgba(255,255,255,.25);backdrop-filter:blur(3px);
+    padding:3px 9px;border-radius:999px;font-weight:700;
+  }
+  .g1{background:linear-gradient(150deg,#E8B7A0,#B76E79 70%,#7A2E3A)}
+  .g2{background:linear-gradient(150deg,#D9C08A,#B78F4E 70%,#6E5326)}
+  .g3{background:linear-gradient(150deg,#C9A0AA,#8A4E5C 65%,#4B2530)}
+  .g4{background:linear-gradient(150deg,#EAD6C4,#C99C86 68%,#7A5240)}
+  .g5{background:linear-gradient(150deg,#D6A9B4,#A85E6E 65%,#5E2833)}
+  .g6{background:linear-gradient(150deg,#E4C7A6,#C79B6C 65%,#6E4A28)}
+  .g7{background:linear-gradient(150deg,#C6A6C0,#8E5E86 65%,#4E2E4B)}
+  .g8{background:linear-gradient(150deg,#EBC9BE,#C98A7A 65%,#7A4438)}
+  .gal-card::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(90% 60% at 25% 15%, rgba(255,255,255,.35) 0%, transparent 50%),
+      linear-gradient(to top, rgba(0,0,0,.28) 0%, transparent 45%);
+  }
+  .gal-card .lbl,.gal-card .beforeafter{position:absolute;z-index:2}
+  .gal-card .beforeafter{
+    top:12px;left:12px;
+    background:rgba(94,32,41,.82);color:#F7EDE8;
+    font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    padding:4px 10px;border-radius:999px;
+  }
+  @media(max-width:820px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- gelin bandı ---------- */
+  .bridal{
+    position:relative;overflow:hidden;color:#F7EDE8;
+    background:linear-gradient(140deg,var(--bordo) 0%, var(--bordo-dark) 60%, #421820 100%);
+  }
+  .bridal::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(50% 60% at 85% 20%, rgba(201,169,106,.28) 0%, transparent 60%),
+      radial-gradient(45% 55% at 10% 90%, rgba(183,110,121,.30) 0%, transparent 60%);
+  }
+  .bridal .wrap{position:relative;z-index:1}
+  .bridal-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .bridal .eyebrow{color:var(--gold-soft)}
+  .bridal .eyebrow::before{background:var(--gold-soft)}
+  .bridal h2{font-size:clamp(2rem,4.5vw,3rem);color:#fff;margin:.4em 0 .5em}
+  .bridal h2 em{font-style:italic;color:var(--gold-soft)}
+  .bridal p{color:rgba(247,237,232,.85);font-size:1.06rem;margin-bottom:26px;max-width:44ch}
+  .bridal-list{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:12px}
+  .bridal-list li{display:flex;align-items:flex-start;gap:12px;font-size:.98rem;color:rgba(247,237,232,.92)}
+  .bridal-list li svg{width:20px;height:20px;flex:none;color:var(--gold-soft);margin-top:2px}
+  .bridal-card{
+    background:rgba(251,247,244,.07);
+    border:1px solid rgba(228,211,174,.3);
+    border-radius:24px;padding:34px 30px;
+    backdrop-filter:blur(4px);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+  }
+  .bridal-card .pkg-tag{
+    display:inline-block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold-soft);font-weight:700;margin-bottom:10px;
+  }
+  .bridal-card h3{font-family:var(--serif);font-size:1.7rem;color:#fff;margin-bottom:6px}
+  .bridal-card .price{font-family:var(--serif);font-size:2.6rem;color:var(--gold-soft);margin:14px 0 4px;font-variant-numeric:tabular-nums}
+  .bridal-card .price small{font-size:.9rem;color:rgba(247,237,232,.7);font-family:var(--sans);letter-spacing:.05em}
+  .bridal-card ul{list-style:none;padding:0;margin:18px 0 26px;display:grid;gap:10px}
+  .bridal-card ul li{display:flex;align-items:center;gap:10px;font-size:.92rem;color:rgba(247,237,232,.9)}
+  .bridal-card ul li svg{width:17px;height:17px;color:var(--gold-soft);flex:none}
+  .btn-wa-gold{
+    display:inline-flex;align-items:center;justify-content:center;gap:.6em;width:100%;
+    background:linear-gradient(135deg,var(--gold),#B78F4E);color:#3a2410;text-decoration:none;
+    padding:15px 22px;border-radius:14px;font-weight:800;font-size:1rem;
+    transition:transform .2s,filter .2s;
+  }
+  .btn-wa-gold:hover{transform:translateY(-2px);filter:brightness(1.06)}
+  .btn-wa-gold svg{width:20px;height:20px}
+  @media(max-width:820px){.bridal-grid{grid-template-columns:1fr;gap:34px}}
+
+  /* ---------- bilgi: saatler + konum ---------- */
+  .info{background:var(--blush)}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .info-card{
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    padding:30px 28px;box-shadow:var(--shadow-sm);
+  }
+  .info-card h3{display:flex;align-items:center;gap:12px;font-size:1.35rem;color:var(--bordo);margin-bottom:20px}
+  .info-card h3 .hic{
+    width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;
+    background:linear-gradient(135deg,#F3E1DA,#E7CBC2);color:var(--bordo);
+  }
+  .info-card h3 .hic svg{width:22px;height:22px}
+  .hours{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+  .hours li{display:flex;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--line);font-size:.96rem}
+  .hours li:last-child{border-bottom:none}
+  .hours li span:first-child{color:var(--ink)}
+  .hours li span:last-child{color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .hours li.today{background:linear-gradient(90deg,rgba(201,169,106,.14),transparent);border-radius:8px;padding-left:10px}
+  .hours li.today span:first-child{font-weight:700;color:var(--bordo)}
+  .hours li.closed span:last-child{color:var(--rose-deep);font-weight:600}
+  .map-area{
+    aspect-ratio:16/10;border-radius:16px;overflow:hidden;position:relative;margin-bottom:20px;
+    background:
+      linear-gradient(135deg,#EFE2D6 0%, #E4D2C6 100%);
+  }
+  .map-area::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(183,110,121,.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(183,110,121,.14) 1px, transparent 1px);
+    background-size:34px 34px;
+  }
+  .map-area .road{
+    content:"";position:absolute;top:52%;left:-5%;right:-5%;height:14px;
+    background:rgba(201,169,106,.5);transform:rotate(-7deg);border-radius:8px;
+  }
+  .map-area .road2{
+    position:absolute;top:12%;left:38%;bottom:-5%;width:12px;
+    background:rgba(183,110,121,.35);transform:rotate(9deg);border-radius:8px;
+  }
+  .map-pin{
+    position:absolute;top:44%;left:47%;transform:translate(-50%,-100%);
+    display:flex;flex-direction:column;align-items:center;z-index:2;
+  }
+  .map-pin .dot{
+    width:38px;height:38px;border-radius:50% 50% 50% 6px;transform:rotate(45deg);
+    background:linear-gradient(135deg,var(--rose),var(--bordo));
+    box-shadow:0 8px 18px -6px rgba(122,46,58,.7);display:grid;place-items:center;
+  }
+  .map-pin .dot svg{width:18px;height:18px;color:#fff;transform:rotate(-45deg)}
+  .map-pin .tip{margin-top:12px;background:#fff;color:var(--bordo);font-weight:700;font-size:.78rem;padding:4px 12px;border-radius:999px;box-shadow:var(--shadow-sm);white-space:nowrap}
+  .addr{display:flex;align-items:flex-start;gap:12px;font-size:.96rem;color:var(--ink);margin-bottom:8px}
+  .addr svg{width:18px;height:18px;color:var(--rose);flex:none;margin-top:3px}
+  .info-card .btn-call{margin-top:14px;width:100%;justify-content:center}
+  @media(max-width:820px){.info-grid{grid-template-columns:1fr}}
+
+  /* ---------- iletişim CTA ---------- */
+  .contact{background:linear-gradient(180deg,#F2E2DA 0%, var(--blush) 100%);text-align:center}
+  .contact-inner{max-width:660px;margin:0 auto}
+  .contact h2{font-size:clamp(2rem,4.5vw,2.9rem);color:var(--bordo);margin:.4em 0 .35em}
+  .contact p{color:var(--ink-soft);font-size:1.08rem;margin-bottom:30px}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+  .phone-line{
+    margin-top:26px;font-family:var(--serif);font-size:1.5rem;color:var(--bordo);
+    display:inline-flex;align-items:center;gap:.5em;text-decoration:none;
+  }
+  .phone-line svg{width:22px;height:22px;color:var(--rose)}
+
+  /* ---------- footer ---------- */
+  footer.site{background:var(--bordo-dark);color:rgba(247,237,232,.8);padding:52px 0 26px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;margin-bottom:34px}
+  .foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .foot-brand .brand-mark{box-shadow:none}
+  .foot-brand strong{font-family:var(--serif);font-size:1.3rem;color:#fff;font-weight:400}
+  .foot-brand span{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft)}
+  footer.site p{font-size:.9rem;line-height:1.7;color:rgba(247,237,232,.72)}
+  .foot-col h4{font-family:var(--serif);font-size:1.05rem;color:#fff;font-weight:400;margin:0 0 14px}
+  .foot-col ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+  .foot-col ul li{font-size:.9rem}
+  .foot-col ul li a{text-decoration:none;color:rgba(247,237,232,.78);display:inline-flex;align-items:center;gap:.5em;transition:color .15s}
+  .foot-col ul li a:hover{color:var(--gold-soft)}
+  .foot-col ul li svg{width:15px;height:15px;color:var(--gold-soft);flex:none}
+  .foot-bottom{border-top:1px solid rgba(228,211,174,.18);padding-top:22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .foot-note{font-size:.8rem;color:rgba(247,237,232,.6);max-width:60ch;line-height:1.6}
+  .foot-demo{
+    display:inline-flex;align-items:center;gap:.5em;
+    background:rgba(201,169,106,.16);border:1px solid rgba(228,211,174,.35);
+    color:var(--gold-soft);padding:7px 14px;border-radius:999px;
+    font-size:.74rem;letter-spacing:.08em;font-weight:700;text-transform:uppercase;
+    text-decoration:none;
+  }
+  .foot-demo svg{width:14px;height:14px}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:26px}}
+
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important;transition:none !important;animation:none !important}
+  }
+  :focus-visible{outline:2.5px solid var(--rose);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- ÖRNEK ÇALIŞMA ROZETİ -->
+<a class="demo-badge" href="https://wa.me/905305957176" target="_blank" rel="noopener" aria-label="Örnek çalışma — Hatay Digital">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+  ÖRNEK ÇALIŞMA · <b>Hatay Digital</b>
+</a>
+
+<!-- SABİT WHATSAPP -->
+<a class="wa-fab" href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20randevu%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp'tan yazın">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.34.44-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.9-2.19-.24-.57-.48-.5-.66-.5l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.07 2.87 1.22 3.06c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.13a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.93-.2-.3A8.13 8.13 0 1 1 12 20.13Z"/></svg>
+  <span class="lbl-long">WhatsApp'tan Randevu</span>
+</a>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span class="brand-txt">
+        <strong>Nur Güzellik</strong>
+        <span>Kuaför &amp; Güzellik</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Ana menü">
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#galeri">Stiller</a>
+      <a href="#gelin">Gelin Paketi</a>
+      <a href="#iletisim">İletişim</a>
+      <a class="nav-cta" href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20randevu%20almak%20istiyorum." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.13a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.93-.2-.3A8.13 8.13 0 1 1 12 20.13Z"/></svg>
+        Randevu
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Antakya · Kadın Kuaförü &amp; Güzellik Salonu</span>
+      <h1>Kendini <em>en güzel</em> hissedeceğin yer</h1>
+      <p class="hero-lead">Uzman ellerde saç, cilt ve bakım. Her detayı sana özel; sıcacık bir salon havasında.</p>
+      <div class="hero-actions">
+        <a class="btn-wa-hero" href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20randevu%20almak%20istiyorum.%20M%C3%BCsait%20g%C3%BCnleriniz%20nedir%3F" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.13a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.93-.2-.3A8.13 8.13 0 1 1 12 20.13Z"/></svg>
+          WhatsApp'tan Randevu
+        </a>
+        <a class="btn-call" href="tel:+905305957176">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          Hemen Ara
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div><strong>10+</strong><span>Yıllık deneyim</span></div>
+        <div><strong>Gelin</strong><span>Özel paketler</span></div>
+        <div><strong>7/6</strong><span>Gün açığız</span></div>
+      </div>
+    </div>
+
+    <div class="hero-photo" role="img" aria-label="Nur Güzellik salon atmosferi görseli">
+      <span class="float-tag">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.6 6.9L22 9.7l-5.5 4.6L18.3 22 12 17.8 5.7 22l1.8-7.7L2 9.7l7.4-.8L12 2Z"/></svg>
+        Sana özel bakım
+      </span>
+      <div class="glass">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.06 11.9 6.5 9.34"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.8 14.8 20 20"/></svg></svg></span>
+        <div>
+          <strong>Uzman kuaförler</strong>
+          <span>Kesim · Boya · Bakım · Şekillendirme</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HİZMETLER -->
+<section class="services" id="hizmetler">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="display:inline-flex">Hizmetlerimiz</span>
+      <h2>Baştan aşağı güzelliğe</h2>
+      <p>Saçından tırnağına, günlük bakımdan özel günlerine kadar her ihtiyacın tek çatı altında.</p>
+    </div>
+    <div class="svc-grid">
+
+      <article class="svc-card">
+        <span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg></span>
+        <h3>Saç Kesim &amp; Fön</h3>
+        <p>Yüz şekline özel kesim, katmanlı modeller ve göz alıcı fön şekillendirme.</p>
+        <span class="svc-price">150 – 350 ₺ <small>arası</small></span>
+      </article>
+
+      <article class="svc-card">
+        <span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10Z"/></svg></span>
+        <h3>Saç Boya &amp; Röfle</h3>
+        <p>Dip boya, ombre, balyaj ve röfle. Sararmayan, kalıcı ve parlak renkler.</p>
+        <span class="svc-price">400 – 1200 ₺ <small>arası</small></span>
+      </article>
+
+      <article class="svc-card">
+        <span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c4-8 12-8 16 0"/><path d="M12 4v8"/><path d="M9 6.5 12 4l3 2.5"/></svg></span>
+        <h3>Keratin &amp; Bakım</h3>
+        <p>Keratin düzleştirme, botoks bakım ve saç maskeleri ile ipeksi, sağlıklı saçlar.</p>
+        <span class="svc-price">700 – 2000 ₺ <small>arası</small></span>
+      </article>
+
+      <article class="svc-card">
+        <span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-3 15-3 18 0"/><path d="M3 12c3 3 15 3 18 0"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></span>
+        <h3>Kaş &amp; Kirpik</h3>
+        <p>Kaş tasarımı, alma, ipe alma, kirpik lifting ve kalıcı kaş şekillendirme.</p>
+        <span class="svc-price">80 – 450 ₺ <small>arası</small></span>
+      </article>
+
+      <article class="svc-card">
+        <span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 3v9l6.5 3.5"/></svg></span>
+        <h3>Ağda &amp; Epilasyon</h3>
+        <p>Sir ağda, klasik ağda ve bölgesel epilasyon; hijyenik ve konforlu uygulama.</p>
+        <span class="svc-price">100 – 600 ₺ <small>arası</small></span>
+      </article>
+
+      <article class="svc-card">
+        <span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-5 6-5s6 2 6 5"/><path d="M6 12v3a6 6 0 0 0 12 0v-3"/><path d="M9 12v2"/><path d="M12 12v2"/><path d="M15 12v2"/></svg></span>
+        <h3>Manikür &amp; Pedikür</h3>
+        <p>Kalıcı oje, protez tırnak, nail art ve bakım; el ve ayaklarında pürüzsüz zarafet.</p>
+        <span class="svc-price">150 – 500 ₺ <small>arası</small></span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- STİL GALERİSİ -->
+<section class="gallery-sec" id="galeri">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="display:inline-flex">Stil Galerisi</span>
+      <h2>Önce &amp; sonra, hep daha güzel</h2>
+      <p>Salonumuzda hayat bulan renk ve model dokunuşlarından bir esinti.</p>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-card g1"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Balyaj<span>Boya</span></span></div>
+      <div class="gal-card g2"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Karamel Ton<span>Röfle</span></span></div>
+      <div class="gal-card g3"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Bordo Işıltı<span>Boya</span></span></div>
+      <div class="gal-card g4"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Keratin Parlaklık<span>Bakım</span></span></div>
+      <div class="gal-card g5"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Dalgalı Fön<span>Şekil</span></span></div>
+      <div class="gal-card g6"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Sıcak Blond<span>Boya</span></span></div>
+      <div class="gal-card g7"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Topuz Modeli<span>Gelin</span></span></div>
+      <div class="gal-card g8"><span class="beforeafter">Öncesi → Sonrası</span><span class="lbl">Bakır Ton<span>Boya</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GELİN BANDI -->
+<section class="bridal" id="gelin">
+  <div class="wrap bridal-grid">
+    <div>
+      <span class="eyebrow">Gelin &amp; Özel Gün</span>
+      <h2>En özel gününde <em>ışıl ışıl</em> parla</h2>
+      <p>Söz, nişan, kına ve düğün için baştan aşağı hazırlık. Provadan güne kadar yanındayız; o gün sadece mutluluğa odaklan.</p>
+      <ul class="bridal-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ücretsiz ön görüşme ve deneme provası</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Gelin saçı, makyajı ve cilt hazırlığı</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> İsteğe bağlı anne &amp; yakın refakat paketleri</li>
+      </ul>
+      <a class="btn-call" href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20gelin%20paketi%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" style="border-color:var(--gold-soft);color:var(--gold-soft);background:transparent">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.13a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.93-.2-.3A8.13 8.13 0 1 1 12 20.13Z"/></svg>
+        Gelin Paketi Sor
+      </a>
+    </div>
+
+    <div class="bridal-card">
+      <span class="pkg-tag">En çok tercih edilen</span>
+      <h3>Gelin Güzellik Paketi</h3>
+      <div class="price">3.500 ₺<small> ’den başlayan</small></div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Deneme provası + düğün günü uygulama</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Gelin saçı &amp; profesyonel makyaj</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> El, ayak bakımı ve kalıcı oje</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Kaş tasarımı ve cilt hazırlığı</li>
+      </ul>
+      <a class="btn-wa-gold" href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20Gelin%20G%C3%BCzellik%20Paketi%20i%C3%A7in%20randevu%20ve%20fiyat%20bilgisi%20rica%20ediyorum." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.13a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.93-.2-.3A8.13 8.13 0 1 1 12 20.13Z"/></svg>
+        WhatsApp'tan Yerini Ayır
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BİLGİ: SAATLER + KONUM -->
+<section class="info">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="display:inline-flex">Bize Ulaşın</span>
+      <h2>Çalışma saatleri &amp; konum</h2>
+      <p>Antakya merkezde, kolay ulaşılabilir bir noktadayız. Kapıda kahvemiz hazır.</p>
+    </div>
+    <div class="info-grid">
+
+      <div class="info-card">
+        <h3><span class="hic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span> Çalışma Saatleri</h3>
+        <ul class="hours">
+          <li class="today"><span>Pazartesi</span><span>09:00 – 20:00</span></li>
+          <li><span>Salı</span><span>09:00 – 20:00</span></li>
+          <li><span>Çarşamba</span><span>09:00 – 20:00</span></li>
+          <li><span>Perşembe</span><span>09:00 – 20:00</span></li>
+          <li><span>Cuma</span><span>09:00 – 20:00</span></li>
+          <li><span>Cumartesi</span><span>09:00 – 21:00</span></li>
+          <li class="closed"><span>Pazar</span><span>Kapalı</span></li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3><span class="hic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span> Konum &amp; İletişim</h3>
+        <div class="map-area" role="img" aria-label="Salon konumunu gösteren temsili harita">
+          <span class="road"></span>
+          <span class="road2"></span>
+          <span class="map-pin">
+            <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <span class="tip">Nur Güzellik</span>
+          </span>
+        </div>
+        <div class="addr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Kurtuluş Cad. No: 00, Antakya / Hatay <em style="color:var(--ink-soft);font-style:normal">(örnek adres)</em></span>
+        </div>
+        <div class="addr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          <span>0530 595 71 76</span>
+        </div>
+        <a class="btn-call" href="tel:+905305957176">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          0530 595 71 76 — Ara
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- İLETİŞİM CTA -->
+<section class="contact" id="iletisim">
+  <div class="wrap contact-inner">
+    <span class="eyebrow" style="display:inline-flex">Randevu</span>
+    <h2>Yeni bakışını bugün planla</h2>
+    <p>Müsait günlerimizi ve fiyatları öğrenmek, randevunu ayırtmak için tek bir mesaj yeterli.</p>
+    <div class="contact-actions">
+      <a class="btn-wa-hero" href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20randevu%20almak%20istiyorum." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.13a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.93-.2-.3A8.13 8.13 0 1 1 12 20.13Z"/></svg>
+        WhatsApp'tan Randevu Al
+      </a>
+      <a class="btn-call" href="tel:+905305957176">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        Hemen Ara
+      </a>
+    </div>
+    <a class="phone-line" href="tel:+905305957176">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+      0530 595 71 76
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark" aria-hidden="true">N</span>
+          <span class="brand-txt">
+            <strong>Nur Güzellik</strong>
+            <span>Kuaför &amp; Güzellik</span>
+          </span>
+        </div>
+        <p>Antakya'da kadın kuaförü ve güzellik salonu. Saç, cilt ve bakımda sana özel, sıcacık bir hizmet anlayışı.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Hizmetler</h4>
+        <ul>
+          <li><a href="#hizmetler">Saç Kesim &amp; Boya</a></li>
+          <li><a href="#hizmetler">Keratin &amp; Bakım</a></li>
+          <li><a href="#hizmetler">Kaş, Kirpik &amp; Ağda</a></li>
+          <li><a href="#gelin">Gelin Paketleri</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>İletişim</h4>
+        <ul>
+          <li><a href="https://wa.me/905305957176?text=Merhaba%20Nur%20G%C3%BCzellik%2C%20randevu%20almak%20istiyorum." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Z"/></svg> WhatsApp Randevu</a></li>
+          <li><a href="tel:+905305957176"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 0530 595 71 76</a></li>
+          <li><a href="#iletisim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Antakya / Hatay</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-note">
+        Bu bir <strong style="color:var(--gold-soft)">örnek çalışmadır</strong>. “Nur Güzellik &amp; Kuaför” kurgusal bir işletmedir; gerçek bir firmayı temsil etmez. Hatay Digital tarafından tanıtım amacıyla hazırlanmıştır.
+      </p>
+      <a class="foot-demo" href="https://wa.me/905305957176?text=Merhaba%2C%20i%C5%9Fletmem%20i%C3%A7in%20b%C3%B6yle%20bir%20site%20istiyorum." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+        Hatay Digital · Örnek Çalışma
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
